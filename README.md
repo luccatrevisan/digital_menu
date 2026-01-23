@@ -2,7 +2,7 @@
 # digital_menu - Cookie Management System
 (Literal cookies. Not website cookies.)
 
-A full-stack digital menu system built with Django to manage my handmade cookie business in Niterói, Brazil.
+A digital menu system built with Django to manage my handmade cookie business in Brazil.
 
 ## Roadmap
 
@@ -47,8 +47,7 @@ A full-stack digital menu system built with Django to manage my handmade cookie 
 
 ## Tech Stack
 
-Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git
-Basic HTML, CSS and Javascript
+Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git • Basic HTML, CSS and Javascript
 
 ## 🏃 Quick Start
 ```bash
@@ -91,7 +90,7 @@ Access: `http://localhost:8000/admin`
 
 ## Documentation
 
-Detailed DEVLOGs with decisions, challenges, and learnings: `/docs/devlogs/`
+Detailed DEVLOGs with decisions, challenges, and learnings (in Brazilian Portuguese): `/docs/devlogs/`
 
 ## ✉️ Contact
 
