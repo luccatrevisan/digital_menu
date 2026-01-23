@@ -49,7 +49,7 @@ A digital menu system built with Django to manage my handmade cookie business in
 
 Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git • Basic HTML, CSS and Javascript
 
-## 🏃 Quick Start
+## Quick Start
 ```bash
 # Clone the repository
 git clone https://github.com/luccatrevisan/digital_menu.git
@@ -80,8 +80,6 @@ python manage.py createsuperuser
 # Start server
 python manage.py runserver
 ```
-
-Access: `http://localhost:8000/admin`
 
 ## Key Decisions
 
