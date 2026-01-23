@@ -50,15 +50,35 @@ A full-stack digital menu system built with Django to manage my handmade cookie 
 Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git
 Basic HTML, CSS and Javascript
 
-## Quick Start
+## 🏃 Quick Start
 ```bash
+# Clone the repository
 git clone https://github.com/luccatrevisan/digital_menu.git
 cd digital_menu
-python -m venv venv && source venv/bin/activate
+
+# Create and activate virtual environment
+python -m venv venv
+
+# Activate venv (choose your OS):
+source venv/bin/activate      # Linux/Mac
+venv\Scripts\activate         # Windows (CMD)
+venv\Scripts\Activate.ps1     # Windows (PowerShell)
+
+# Install dependencies
 pip install -r requirements.txt
-cp .env.example .env  # Edit with your settings
+
+# Set up environment variables
+cp .env.example .env  # Linux/Mac
+copy .env.example .env  # Windows
+# Edit .env with your settings
+
+# Run migrations
 python manage.py migrate
+
+# Create superuser
 python manage.py createsuperuser
+
+# Start server
 python manage.py runserver
 ```
 
