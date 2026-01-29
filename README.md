@@ -5,45 +5,12 @@
 A digital menu system built with Django to manage my handmade cookie business in Brazil.
 
 ## Roadmap
+This project follows a structured approach, divided into logical tiers, from data modeling to DevOps. Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
 
-### Stage 1: Foundation & API (Current)
-- [x] Data modeling (Category, MenuItem)
-- [x] Project setup
-- [ ] REST API with DRF
-- [ ] Custom Django Admin
-- [ ] Swagger/OpenAPI documentation
+![ROADMAP](docs/img/roadmap.png)
 
-### Stage 2: Authentication & Security
-- [ ] JWT authentication
-- [ ] User profiles and addresses
-- [ ] Granular permissions
-
-### Stage 3: Cart & Orders
-- [ ] Order models (Order, OrderItem)
-- [ ] Atomic transactions
-- [ ] Order state machine
-
-### Stage 4: Payment Integration
-- [ ] Stripe SDK integration
-- [ ] Payment webhooks
-- [ ] Error handling
-
-### Stage 5: Automation (Celery + Redis)
-- [ ] Asynchronous tasks
-- [ ] Automated emails
-- [ ] Loyalty system
-- [ ] WhatsApp notifications
-
-### Stage 6: Analytics Dashboard
-- [ ] Sales reports
-- [ ] Best-selling products tracking
-- [ ] Recommendation algorithm
-
-### Stage 7: DevOps & Production
-- [ ] Automated tests
-- [ ] Docker + docker-compose
-- [ ] CI/CD pipeline
-- [ ] Deployment (Railway/Render)
+I am also using Kanban methodology to manage my tasks on Notion, where you can see my live workflow.
+[👉 View Project Board on Notion](https://www.notion.so/digital_menu-2f77457680e780f5a107d98ab68e2dd1?source=copy_link)
 
 ## Tech Stack
 
