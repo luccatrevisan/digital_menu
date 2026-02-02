@@ -20,3 +20,12 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Stock(models.Model):
+    menu_item = models.OneToOneField(MenuItem, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    minimum_stock = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.quantity} unidades disponíveis."
