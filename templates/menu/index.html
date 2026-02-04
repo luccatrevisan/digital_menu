@@ -1,0 +1,330 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'menu/css/style.css' %}">
+        <title>Chewie Cookies</title>
+    </head>
+    <body>
+        <header>
+            <img src="imagens/logo-sem-fundo100-removebg-preview.png" alt="Logo Chewie Cookies">
+        </header>
+
+        <!-- Carrinho Flutuante -->
+        <div class="carrinho-flutuante" onclick="abrirCarrinho()">
+            🛒 Carrinho
+            <span class="badge-carrinho" id="badgeCarrinho">0</span>
+        </div>
+
+        <!-- Modal do Carrinho -->
+        <div id="modalCarrinho" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🛒 Seu Pedido</h2>
+                    <span class="close" onclick="fecharCarrinho()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="itensCarrinho"></div>
+                    <div class="total-carrinho">
+                        <div class="total-valor">Total: R$ <span id="totalCarrinho">0,00</span></div>
+                        <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+                            📱 Finalizar no WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="categoria-produto">
+                <h2>Cookie de Ouro 2024: Os mais vendidos</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/cookieDeOuro-300.png" alt="Cookie de Ouro: Tradicional New York" width="200px">
+                        <h3>Cookie de Ouro: Tradicional New York</h3>
+                        <p>O favorito do ano e campeão absoluto do Cookie de Ouro 2024! Nosso Tradicional New York é o verdadeiro rei dos cookies, aclamado por todos que se apaixonaram por sua massa irresistível, repleta de pedaços generosos de chocolate e nozes.</p>
+                        <p><strong>R$13,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Ouro: Tradicional New York', 13.00)">Adicionar ao Carrinho</button>
+                    </div>
+
+                    <div class="item-produto">
+                        <img src="imagens/cookieDePrata-300.png" alt="Cookie de Prata: Tradicional Chocolatudo" width="200px">
+                        <h3>Cookie de Prata: Tradicional Chocolatudo</h3>
+                        <p>Prepare-se para se apaixonar pelo vice-campeão absoluto do Cookie de Ouro 2024! Nosso Chocolatudo é mais do que um cookie, é uma experiência única. A massa macia e úmida, repleta de pedaços de chocolate de vários tipos, derrete na boca e te leva direto para o paraíso do chocolate. Um abraço saboroso que conquistou o segundo lugar nos corações e pedidos dos nossos clientes durante todo o ano de 2024.</p>
+                        <p><strong>R$13,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Prata: Tradicional Chocolatudo', 13.00)">Adicionar ao Carrinho</button>
+                    </div>
+
+                    <div class="item-produto">
+                        <img src="imagens/cookieDeBronze-300.png" alt="Cookie de Bronze: Ninho com Nutella" width="200px">
+                        <h3>Cookie de Bronze: Ninho com Nutella</h3>
+                        <p>Irresistível, viciante e agora oficialmente premiado! O Ninho com Nutella garantiu seu lugar no pódio do Cookie de Ouro 2024. Com sua massa de chocolate irresistível, recheio cremoso de leite Ninho e aquela Nutella que derrete corações, ele é a combinação perfeita que conquistou o terceiro lugar nos pedidos mais amados do ano. Cuidado: é impossível comer só um!</p>
+                        <p><strong>R$15,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Bronze: Ninho com Nutella', 15.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Ofertas da Chewie</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/comboCopoCookie-300.JPG" alt="Copo Gelado Ninho com Brigadeiro + Cookie Brigadeiro" width="200px">
+                        <h3>Copo Gelado Ninho com Brigadeiro + Cookie Brigadeiro</h3>
+                        <p>O nosso queridinho do verão junto com o nosso Cookie Brigadeiro para refrescar a sua rotina de um jeito mais gostoso. A opção perfeita para levar essas duas delícias com desconto.</p>
+                        <p><span class="older-price">R$28,00 </span><strong>R$24,64</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Copo Gelado Ninho com Brigadeiro + Cookie Brigadeiro', 24.64)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/redEmDobro-300.jpg" alt="Red Velvet em Dobro" width="200px">
+                        <h3>Red Velvet em Dobro</h3>
+                        <p>Duas unidades do nosso cookie que quebra recorde de vendas a cada semana! Na dúvida do que pedir, vai no que todo mundo gosta (e gastando menos)!</p>
+                        <p><span class="older-price">R$30,00 </span> <strong>R$26,40</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Red Velvet Em Dobro', 26.40)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/ninhoNutellaEmDobro-300.jpg" alt="Ninho com Nutella em Dobro" width="200px">
+                        <h3>Ninho com Nutella em Dobro</h3>
+                        <p>Dizem que clichês são clichês porque funcionam! Aprecie cada mordida do nosso clichê preferido com essa dupla de oferta do nosso Cookie Ninho com Nutella!</p>
+                        <p><span class="older-price">R$30,00 </span> <strong>R$26,40</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Ninho com Nutella em Dobro', 26.40)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/trincaSemRecheio-300.jpg" alt="Trinca sem Recheio" width="200px">
+                        <h3>Trinca sem Recheio</h3>
+                        <p>Escolha o seu preferido! Os nossos três cookies sem recheio fazem muito sucesso e são difíceis de superar! Nessa trinca, você pode escolher o que preferir, seja 1 de cada sabor, seja outra combinação que achar melhor</p>
+                        <p><span class="older-price">R$39,00</span> <strong>R$34,32</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Trinca sem Recheio', 34.32)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/trincaVermelha-300.JPG" alt="Trinca Vermelha" width="200px">
+                        <h3>Trinca Vermelha</h3>
+                        <p>Reunimos os 3 melhores itens do nosso cardápio com a massa red! O Cookie Red Velvet, os Chewiezitos Red e o Cookie Tradicional Red em um só lugar e com um desconto imperdível.</p>
+                        <p><span class="older-price">R$43,50</span> <strong>R$38,28</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Trinca Vermelha', 38.28)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/trinca-chocolate300.jpg" alt="Trinca Chocolate" width="200px">
+                        <h3>Trinca Chocolate</h3>
+                        <p>A união faz a força! E quando a união é feita com o que temos de melhor na nossa massa de chocolate, não tem quem os derrote. Chewiezitos Chocolate, Cookie Tradicional Chocolatudo e Cookie Ninho com Nutella. Todos juntos apenas te esperando para serem aproveitados do melhor jeito, e ainda com desconto.</p>
+                        <p><span class="older-price">R$43,50</span> <strong>R$38,28</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Trinca Chocolate', 38.28)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/trinca-baunilha300.jpg" alt="Trinca Baunilha" width="200px">
+                        <h3>Trinca Baunilha</h3>
+                        <p>Uma junção dos Chewiezitos Baunilha, do nosso excelente Cookie Tradicional New York e do nosso autêntico Cookie Nutella em um só item para você aproveitar do melhor jeito: com desconto!</p>
+                        <p><span class="older-price">R$44,00</span> <strong>R$38,72</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Trinca Baunilha', 38.72)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Combos: Leve Mais e Pague Menos</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/comboDeOuro300.JPG" alt="Combo de Ouro 2024" width="200px">
+                        <h3>Combo de Ouro 2024</h3>
+                        <p>Os campeões estão juntos em um combo imperdível! Desfrute da combinação irresistível dos nossos 3 cookies mais pedidos de 2024: o clássico e amado Tradicional New York, o viciante Ninho com Nutella e o intenso Chocolatudo. Um trio de sabores premiados para você viver a experiência dos favoritos do ano</p>
+                        <p><span class="older-price">R$41,00</span> <strong>R$36,08</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Combo de Ouro 2024', 36.08)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/comboTresPassos300.jpg" alt="Combo Três Passos" width="200px">
+                        <h3>Combo Três Passos</h3>
+                        <p>Descubra os sabores mais amados em um único combo! Nosso Combo Três Passos reúne os nossos cookies mais irresistíveis em um único lugar. O Red Velvet, o Ninho com Nutella e o Brigadeiro te proporcionam uma experiência única e deliciosa. Prepare-se para uma explosão de sabor em cada mordida e descubra por que cada cookie é como se fosse um passo em direção ao paraíso.</p>
+                        <p><span class="older-price">R$41,00</span> <strong>R$36,08</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Combo Três Passos', 36.08)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/trinca-chewiezitos300.jpg" alt="Trinca Chewiezitos" width="200px">
+                        <h3>Trinca Chewiezitos</h3>
+                        <p>Monte seu trio perfeito! Escolha três sabores irresistíveis de Chewiezitos. Um combo generoso para quem não consegue escolher só um favorito!</p>
+                        <p><span class="older-price">R$46,50</span> <strong>R$40,92</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Trinca Chewiezitos', 40.92)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/leve7pague6-300.jpg" alt="Leve 7 Pague 6" width="200px">
+                        <h3>Leve 7 Pague 6 - Cookies Tradicionais</h3>
+                        <p>Para compartilhar com amigos, família ou até para cair dentro você mesmo! Basta escolher os sabores e o último fica por nossa conta.</p>
+                        <p><span class="older-price">R$91,00</span> <strong>R$78,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Leve 7 Pague 6 - Cookies Tradicionais', 78.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Brigadeiro de Colher</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/brigadeiroChocolate-300.jpg" alt="Brigadeiro de Colher Chocolate" width="200px">
+                        <h3>Brigadeiro de Colher Chocolate</h3>
+                        <p>Esteja você buscando um adicional delicioso ou um item singular, nosso Recheio de Chocolate promete levar sua felicidade a um novo patamar! Produzido artesanalmente, nosso brigadeiro é delicadamente doce e ostenta uma cremosidade incomparável, que você jamais experimentou.</p>
+                        <p><strong>R$5,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Brigadeiro de Colher Chocolate', 5.50)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/brigadeiroLeiteNinho-300.jpg" alt="Brigadeiro de Colher Leite Ninho" width="200px">
+                        <h3>Brigadeiro de Colher Leite Ninho</h3>
+                        <p>Seja como complemento, seja como protagonista do seu pedido, nosso Recheio Leite Ninho promete elevar seu paladar a um novo nível de satisfação! Apresentamos um equilíbrio perfeito de doçura e cremosidade, nosso recheio autêntico, decorado com leite em pó, destaca-se por sua cremosidade incomparável.</p>
+                        <p><strong>R$5,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Brigadeiro de Colher Leite Ninho', 5.50)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/brigadeiroDoceDeLeite-300.jpg" alt="Brigadeiro de Colher Doce de Leite" width="200px">
+                        <h3>Brigadeiro de Colher Doce de Leite</h3>
+                        <p>Apresentamos o Recheio Doce de Leite, uma verdadeira obra-prima do paladar que vai te proporcionar uma explosão de alegria! Nosso recheio de doce de leite é uma união perfeita entre sabor e textura, tornando-se o mais cremoso que você poderá experimentar</p>
+                        <p><strong>R$5,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Brigadeiro de Colher Doce de Leite', 5.50)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Cookie Tradicional</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/chocolatudo-200.jpg" alt="" width="200px">
+                        <h3>Cookie Tradicional Chocolatudo</h3>
+                        <p>Prepare-se para se apaixonar! Nosso Chocolatudo é mais do que um cookie, é uma experiência única. A massa macia e úmida, repleta de pedaços de chocolate de vários tipos, derrete na boca e te leva para o paraíso do chocolate. Ideal para os momentos em que você precisa de um abraço saboroso.</p>
+                        <p><strong>R$13,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Tradicional Chocolatudo', 13.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/newYork-200.jpg" alt="" width="200px">
+                        <h3>Cookie Tradicional New York</h3>
+                        <p>Descubra o segredo do nosso cookie mais amado! Nosso Cookie Tradicional New York é a porta de entrada para um mundo de sabores. Com uma massa irresistível e pedaços generosos de chocolate e nozes, ele é a pedida perfeita para os amantes de cookies que buscam uma experiência autêntica e deliciosa.</p>
+                        <p><strong>R$13,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Tradicional New York', 13.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/redTradicional-200.jpg" alt="" width="200px">
+                        <h3>Cookie Tradicional Red</h3>
+                        <p>Prepare-se para se apaixonar! Nosso Cookie Tradicional Red é mais do que um cookie, é uma experiência inesquecível. A massa macia e úmida, com aquele toque de vermelho icônico, e os pedaços de chocolate branco derretido na boca te levarão para o paraíso dos sabores.</p>
+                        <p><strong>R$13,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Tradicional Red', 13.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Cookie Recheado</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/brigadeiro-200.jpg" alt="Cookie Brigadeiro" width="200px">
+                        <h3>Cookie Brigadeiro</h3>
+                        <p>Atenção: Este cookie vicia! Massa com granulados crocantes e recheio de brigadeiro cremoso. Uma explosão de sabor que vai te conquistar!</p>
+                        <p><strong>R$11,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Brigadeiro', 11.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/redVelvet-200.jpg" alt="Cookie Red Velvet" width="200px">
+                        <h3>Cookie Red Velvet</h3>
+                        <p>O queridinho de 2023 está de volta! Massa aveludada se une ao brigadeiro de cream cheese mais cremoso que você já provou.</p>
+                        <p><strong>R$15,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Red Velvet', 15.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/ninhoNutella-200.jpg" alt="Cookie Ninho com Nutella" width="200px">
+                        <h3>Cookie Ninho com Nutella</h3>
+                        <p>Irresistível e viciante! Massa de chocolate irresistível, recheio cremoso de leite Ninho e deliciosa Nutella. Cuidado, é viciante!</p>
+                        <p><strong>R$15,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Ninho com Nutella', 15.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/nutella-200.jpg" alt="Cookie Nutella" width="200px">
+                        <h3>Cookie Nutella</h3>
+                        <p>Nutella pura. Massa crocante por fora, macia por dentro e recheada com Nutella de verdade, sem mistérios!</p>
+                        <p><strong>R$15,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie Nutella', 15.50)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Chewiezitos</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/chewiezitoChocolate-200.jpg" alt="Chewiezitos Chocolate" width="200px">
+                        <h3>Chewiezitos Chocolate</h3>
+                        <p>Os amantes de chocolate vão se apaixonar! 10 mini cookies feitos com nossa massa de chocolate intensa. Pequenos no tamanho, gigantes no sabor!</p>
+                        <p><strong>R$15,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Chewiezitos Chocolate', 15.50)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/chewiezitosBaunilha-200.jpg" alt="Chewiezitos Baunilha" width="200px">
+                        <h3>Chewiezitos Baunilha</h3>
+                        <p>O clássico ficou ainda melhor! Uma porção exclusiva dos nossos mini cookies de baunilha, crocante por fora e macia por dentro.</p>
+                        <p><strong>R$15,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Chewiezitos Baunilha', 15.50)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/chewiezitosRed-200.jpg" alt="Chewiezitos Red" width="200px">
+                        <h3>Chewiezitos Red</h3>
+                        <p>O charme do red velvet agora em versão mini! 10 unidades dessa delícia de sabor suave e levemente amanteigado, com aquele toque aveludado irresistível.</p>
+                        <p><strong>R$15,50</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Chewiezitos Red', 15.50)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Copo Gelado</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/copoGelado-200.jpg" alt="Copo Gelado Ninho com Brigadeiro" width="200px">
+                        <h3>Copo Gelado Ninho com Brigadeiro</h3>
+                        <p>Uma explosão de sabores! Camadas irresistíveis de mousse de leite Ninho, pedaços dos nossos cookies caseiros, base de brigadeiro cremoso, mousse de chocolate e granulados crocantes.</p>
+                        <p><strong>R$17,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Copo Gelado Ninho com Brigadeiro', 17.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+
+            <section class="categoria-produto">
+                <h2>Marmita de Cookie</h2>
+                <section class="container-produto">
+                    <div class="item-produto">
+                        <img src="imagens/marmita-brigadeiro200.jpg" alt="Marmita de Cookie Brigadeiro" width="200px">
+                        <h3>Marmita de Cookie Brigadeiro</h3>
+                        <p>Sua dose diária de felicidade, agora em tamanho família! Um cookie gigante, macio por dentro e crocante por fora, recheado com brigadeiro irresistível.</p>
+                        <p><strong>R$18,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Marmita de Cookie Brigadeiro', 18.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/marmita-red-velvet200.jpg" alt="Marmita de Cookie Red Velvet" width="200px">
+                        <h3>Marmita de Cookie Red Velvet</h3>
+                        <p>A tradição reinventada! Uma releitura do nosso cookie mais vendido, com um toque a mais de cream cheese e chocolate branco.</p>
+                        <p><strong>R$23,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Marmita de Cookie Red Velvet', 23.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/marmita-ninho-nutella200.jpg" alt="Marmita de Cookie Ninho com Nutella" width="200px">
+                        <h3>Marmita de Cookie Ninho com Nutella</h3>
+                        <p>A dupla perfeita, agora em um novo formato! A combinação perfeita entre o leite Ninho e a Nutella, agora em um formato ainda mais prático e delicioso.</p>
+                        <p><strong>R$23,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Marmita de Cookie Ninho com Nutella', 23.00)">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="item-produto">
+                        <img src="imagens/marmita-nutella200.jpg" alt="Marmita de Cookie Nutella" width="200px">
+                        <h3>Marmita de Cookie Nutella</h3>
+                        <p>O clássico cookie de Nutella em uma versão maior! Assado direto na marmita de alumínio, com massa generosa, bordas muito crocantes e Nutella de verdade.</p>
+                        <p><strong>R$25,00</strong></p>
+                        <button class="botao-carrinho" onclick="adicionarAoCarrinho('Marmita de Cookie Nutella', 25.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+            <p>Chewie Cookies - São Gonçalo e Niterói. Todos os direitos reservados</p>
+            <p>CNPJ: 53.777.291/0001-95 | Rua Frederico Malesherbes Figueiredo 315 Casa 1, Maria Paula, Niterói/RJ | (21) 96769-7037</p>
+            <p>Página desenvolvida por Lucca Trevisan</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>

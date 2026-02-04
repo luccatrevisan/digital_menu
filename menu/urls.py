@@ -1,6 +1,8 @@
 from django.urls import path
-from menu.views import home
+from django.conf import settings
+from django.conf.urls.static import static
+from menu.views import index
 
 urlpatterns = [
-    path("", home),
-]
+    path("", index),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
