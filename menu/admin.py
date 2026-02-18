@@ -11,9 +11,11 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ["id", "image", "name", "category", "price"]
+    list_display = ["id", "image", "name", "category", "old_price", "price"]
+    list_display_links = ["id", "name"]
     search_fields = ["id", "name", "category"]
     list_filter = ["id", "name", "category", "price"]
+    ordering = ["id"]
 
 admin.site.register(MenuItem, MenuItemAdmin)
 
