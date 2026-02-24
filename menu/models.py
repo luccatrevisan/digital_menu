@@ -38,3 +38,32 @@ class Stock(models.Model):
 
     def __str__(self):
         return f"{self.quantity}"
+
+
+class Complement(models.Model): # should it have a complement_group field?
+    name = models.CharField(max_length=100, blank=False, null=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    description = models.TextField(max_length=300, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ComplementGroup(models.Model):
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, blank=False, null=False)
+    min_quantity = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
+    max_quantity = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(1)]) #change? ta certo?
+    complements = models.ManyToManyField(Complement)
+
+    def __str__(self):
+        return self.name
+
+    def clean(self):
+        if self.min_quantity > self.max_quantity:
+            raise ValidationError("The minimum quantity must be less than the maximum.")
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
