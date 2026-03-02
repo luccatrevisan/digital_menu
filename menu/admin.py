@@ -41,5 +41,6 @@ class ComplementGroupAdmin(admin.ModelAdmin):
     list_display_links = ["id", "name"]
     search_fields = ["name", "menu_item"]
     ordering = ["id"]
+    filter_horizontal = ["complements"]
 
 admin.site.register(ComplementGroup, ComplementGroupAdmin)
