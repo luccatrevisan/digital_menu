@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
+from menu.validators import normalize_name, normalize_description
 
 
 class Category(models.Model):
@@ -9,16 +10,24 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def clean(self):
+        normalize_name(self)
+        if self.description: #since its optional (null=True).
+            normalize_description(self)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
 
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(max_length=300, blank=False, null=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, validators=[MinValueValidator(0.01)]) 
-    # adicionei um valor mínimo para price, garantindo que não tenha preço negativo e gratuito
-    old_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) 
-    # não preciso adicionar valor mínimo em old_price porque já tem uma validação no método clean (ele precisa ser maior que price)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, validators=[MinValueValidator(0.01)])
+    old_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to='menu_photos/%Y/', blank=False, null=False)
     is_available = models.BooleanField(default=True)
 
@@ -28,6 +37,9 @@ class MenuItem(models.Model):
     def clean(self):
         if self.old_price is not None and self.old_price <= self.price:
             raise ValidationError("Invalid price.")
+        
+        normalize_name(self)
+        normalize_description(self)
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -51,6 +63,15 @@ class Complement(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        normalize_name(self)
+        if self.description: #since its optional.
+            normalize_description(self)
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
 
 class ComplementGroup(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
@@ -65,6 +86,8 @@ class ComplementGroup(models.Model):
     def clean(self):
         if self.min_quantity > self.max_quantity:
             raise ValidationError("The minimum quantity must be less than the maximum.")
+    
+        normalize_name(self)
     
     def save(self, *args, **kwargs):
         self.full_clean()
