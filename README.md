@@ -8,7 +8,6 @@ A digital menu system built with Django to manage my handmade cookie business in
 This project follows a structured approach, divided into logical tiers, from data modeling to DevOps. Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
 
 ![ROADMAP](docs/img/roadmap.png)
-[👉 Check the Database Diagram](https://dbdiagram.io/d/digital_menu-69aec458cf54053b6f3dcec5)
 
 I'm also tracking tasks on a Notion Kanban board, where you can see my live workflow.
 [👉 View Project Board on Notion](https://www.notion.so/digital_menu-2f77457680e780f5a107d98ab68e2dd1?source=copy_link)
@@ -16,6 +15,7 @@ I'm also tracking tasks on a Notion Kanban board, where you can see my live work
 ## Visual Database
 
 ![DATABASE](docs/img/digital_menu.png)
+[👉 Check the Database Diagram](https://dbdiagram.io/d/digital_menu-69aec458cf54053b6f3dcec5)
 
 ## Tech Stack
 
