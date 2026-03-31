@@ -1,5 +1,5 @@
 from django.contrib import admin
-from menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
+from apps.menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
 
 
 class CategoryAdmin(admin.ModelAdmin):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
+from apps.menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
 
 
 class CategorySerializer(serializers.ModelSerializer):

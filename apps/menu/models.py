@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
-from menu.validators import normalize_name, normalize_description
+from apps.menu.utils import normalize_name, normalize_description
 
 
 class Category(models.Model):
@@ -12,9 +12,9 @@ class Category(models.Model):
         return self.name
     
     def clean(self):
-        normalize_name(self)
+        self.name = normalize_name(self.name)
         if self.description: #since its optional (null=True).
-            normalize_description(self)
+            self.description = normalize_description(self.description)
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -38,8 +38,8 @@ class MenuItem(models.Model):
         if self.old_price is not None and self.old_price <= self.price:
             raise ValidationError("Invalid price.")
         
-        normalize_name(self)
-        normalize_description(self)
+        self.name = normalize_name(self.name)
+        self.description = normalize_description(self.description)
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -64,9 +64,9 @@ class Complement(models.Model):
         return self.name
 
     def clean(self):
-        normalize_name(self)
+        self.name = normalize_name(self.name)
         if self.description: #since its optional.
-            normalize_description(self)
+            self.description = normalize_description(self.description)
     
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -87,7 +87,7 @@ class ComplementGroup(models.Model):
         if self.min_quantity > self.max_quantity:
             raise ValidationError("The minimum quantity must be less than the maximum.")
     
-        normalize_name(self)
+        self.name = normalize_name(self.name)
     
     def save(self, *args, **kwargs):
         self.full_clean()

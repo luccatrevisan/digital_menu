@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class MenuConfig(AppConfig):
-    name = 'menu'
+    name = 'apps.menu'
 
     def ready(self):
-        import menu.signals
+        import apps.menu.signals

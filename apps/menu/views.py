@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
-from menu.serializers import CategorySerializer, MenuItemSerializer, StockSerializer, MenuItemWithStockSerializer, MenuItemByCategorySerializer, ComplementSerializer, ComplementGroupSerializer, ComplementByGroupSerializer
-from menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
+from apps.menu.serializers import CategorySerializer, MenuItemSerializer, StockSerializer, MenuItemWithStockSerializer, MenuItemByCategorySerializer, ComplementSerializer, ComplementGroupSerializer, ComplementByGroupSerializer
+from apps.menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
 
 
 ''' views '''
@@ -48,4 +48,4 @@ class MenuItemWithStockViewSet(generics.ListAPIView):
 
 class MenuItemByCategoryViewSet(generics.ListAPIView):
     serializer_class = MenuItemByCategorySerializer
-    queryset = Category.objects.prefetch_related("menuitem_set").all()
+    queryset = Category.objects.prefetch_related("menuitem_set__complementgroup_set__complements").all()

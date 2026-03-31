@@ -1,0 +1,491 @@
+[
+{
+  "model": "menu.category",
+  "pk": 5,
+  "fields": {
+    "name": "Ofertas da Chewie",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 6,
+  "fields": {
+    "name": "Combos: Leve Mais e Pague Menos",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 7,
+  "fields": {
+    "name": "Cookie de Ouro 2024: Os mais vendidos",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 8,
+  "fields": {
+    "name": "Cookie Recheado",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 9,
+  "fields": {
+    "name": "Cookie Tradicional",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 10,
+  "fields": {
+    "name": "Marmita de Cookie",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 11,
+  "fields": {
+    "name": "Chewiezitos",
+    "description": ""
+  }
+},
+{
+  "model": "menu.category",
+  "pk": 12,
+  "fields": {
+    "name": "Copo Gelado",
+    "description": ""
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 1,
+  "fields": {
+    "name": "Copo Gelado Ninho com Brigadeiro + Cookie Brigadeiro",
+    "category": 5,
+    "description": "O nosso queridinho do ver�o junto com o nosso Cookie Brigadeiro para refrescar o seu ver�o de um jeito mais gostoso. A op��o perfeita para levar essas duas del�cias com desconto.",
+    "price": "21.52",
+    "old_price": "26.90",
+    "image": "menu_photos/2026/IMG_1799.JPG",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 2,
+  "fields": {
+    "name": "Cookie Brigadeiro",
+    "category": 8,
+    "description": "Aten��o: Este cookie vicia! O nosso Brigadeiro � diferente de tudo o que voc� j� provou. A massa, com granulados crocantes, e o recheio de brigadeiro cremoso formam uma combina��o irresist�vel. Cuidado, pois a textura do brigadeiro � t�o cremosa que pode at� escapar do cookie na primeira mordida! Um",
+    "price": "9.90",
+    "old_price": null,
+    "image": "menu_photos/2026/brigadeiro-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 3,
+  "fields": {
+    "name": "Cookie Red Velvet",
+    "category": 8,
+    "description": "O queridinho de 2023 est� de volta! Nosso cookie Red Velvet � a explos�o de sabor que voc� procura. A massa aveludada, com um toque de cacau, se une ao brigadeiro de cream cheese mais cremoso que voc� j� provou, criando uma experi�ncia �nica e irresist�vel. A combina��o entre o cream cheese e o sabo",
+    "price": "13.50",
+    "old_price": null,
+    "image": "menu_photos/2026/redVelvet-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 4,
+  "fields": {
+    "name": "Cookie Ninho com Nutella",
+    "category": 8,
+    "description": "Irresist�vel e viciante! Nosso cookie Ninho com Nutella � a pedida perfeita para os amantes de doces. A massa de chocolate irresist�vel, o recheio cremoso de leite Ninho e a deliciosa Nutella formam uma combina��o �nica que vai te fazer querer mais e mais. Cuidado, pois essa del�cia � viciante!",
+    "price": "13.50",
+    "old_price": null,
+    "image": "menu_photos/2026/ninhoNutella-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 5,
+  "fields": {
+    "name": "Cookie Nutella",
+    "category": 8,
+    "description": "Nutella pura. Nosso cookie � uma explos�o de sabor para os amantes do maior creme de avel� do mundo. Massa crocante por fora, macia por dentro e recheada com Nutella de verdade, sem mist�rios! Cuidado para n�o se lambuzar tanto na primeira mordida!",
+    "price": "13.95",
+    "old_price": null,
+    "image": "menu_photos/2026/nutella-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 6,
+  "fields": {
+    "name": "Cookie Coco",
+    "category": 8,
+    "description": "Cookie de coco com recheio super cremoso de coco e um toque especial de cristais de caramelo. Uma combina��o delicada, diferente e irresist�vel � edi��o limitada, dispon�vel s� at� acabar o estoque.",
+    "price": "13.95",
+    "old_price": null,
+    "image": "menu_photos/2026/WhatsApp_Image_2026-02-01_at_20.12.15.jpeg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 7,
+  "fields": {
+    "name": "Red Velvet em Dobro",
+    "category": 5,
+    "description": "Duas unidades do nosso cookie que quebra recorde de vendas a cada semana! Na d�vida do que pedir, vai no que todo mundo gosta (e gastando menos)!",
+    "price": "21.60",
+    "old_price": "27.00",
+    "image": "menu_photos/2026/redEmDobro-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 8,
+  "fields": {
+    "name": "Ninho com Nutella em Dobro",
+    "category": 5,
+    "description": "Dizem que clich�s s�o clich�s porque funcionam! Aprecie cada mordida do nosso clich� preferido com essa dupla de oferta do nosso Cookie Ninho com Nutella!",
+    "price": "21.60",
+    "old_price": "27.00",
+    "image": "menu_photos/2026/ninhoNutellaEmDobro-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 9,
+  "fields": {
+    "name": "Trinca Sem Recheio",
+    "category": 5,
+    "description": "Escolha o seu preferido! Os nossos tr�s cookies sem recheio fazem muito sucesso e s�o dif�ceis de superar! Nessa trinca, voc� pode escolher o que preferir, seja 1 de cada sabor, seja outra combina��o que achar melhor",
+    "price": "28.08",
+    "old_price": "35.10",
+    "image": "menu_photos/2026/trincaSemRecheio-300.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 10,
+  "fields": {
+    "name": "Combo de Ouro 2024",
+    "category": 6,
+    "description": "Os campe�es est�o juntos em um combo imperd�vel! Desfrute da combina��o irresist�vel dos nossos 3 cookies mais pedidos de 2024: o cl�ssico e amado Tradicional New York, o viciante Ninho com Nutella e o intenso Chocolatudo. Um trio de sabores premiados para voc� viver a experi�ncia dos favoritos do a",
+    "price": "29.52",
+    "old_price": "36.90",
+    "image": "menu_photos/2026/comboDeOuro-200.JPG",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 11,
+  "fields": {
+    "name": "Combo Tr�s Passos",
+    "category": 6,
+    "description": "Descubra os sabores mais amados em um �nico combo! Nosso Combo Tr�s Passos re�ne os nossos cookies mais irresist�veis em um �nico lugar. O Red Velvet, o Ninho com Nutella e o Brigadeiro te proporcionam uma experi�ncia �nica e deliciosa. Prepare-se para uma explos�o de sabor em cada mordida e descubr",
+    "price": "29.52",
+    "old_price": "36.90",
+    "image": "menu_photos/2026/comboTresPassos-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 12,
+  "fields": {
+    "name": "Trinca Chewiezitos",
+    "category": 6,
+    "description": "Escolha os tr�s unidades de sabores que voc� preferir e pague apenas por dois.",
+    "price": "33.48",
+    "old_price": "41.85",
+    "image": "menu_photos/2026/trincaChewiezito-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 13,
+  "fields": {
+    "name": "Leve 7, Pague 6 - Cookies Tradicionais",
+    "category": 6,
+    "description": "para compartilhar com amigos, fam�lia ou at� pra cair dentro voc� mesmo! basta escolher os sabores e o �ltimo fica por nossa conta.",
+    "price": "70.20",
+    "old_price": "81.90",
+    "image": "menu_photos/2026/leve7Pague6-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 14,
+  "fields": {
+    "name": "Cookie de Ouro: Tradicional New York",
+    "category": 7,
+    "description": "O favorito do ano e campe�o absoluto do Cookie de Ouro 2024! Nosso Tradicional New York � o verdadeiro rei dos cookies, aclamado por todos que se apaixonaram por sua massa irresist�vel, repleta de peda�os generosos de chocolate e nozes. Um cl�ssico que nunca sai de moda e � a escolha perfeita para q",
+    "price": "11.70",
+    "old_price": null,
+    "image": "menu_photos/2026/cookieDeOuro-200.png",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 15,
+  "fields": {
+    "name": "Cookie de Prata: Tradicional Chocolatudo",
+    "category": 7,
+    "description": "Prepare-se para se apaixonar pelo vice-campe�o absoluto do Cookie de Ouro 2024! Nosso Chocolatudo � mais do que um cookie, � uma experi�ncia �nica. A massa macia e �mida, repleta de peda�os de chocolate de v�rios tipos, derrete na boca e te leva direto para o para�so do chocolate. Um abra�o saboroso",
+    "price": "11.70",
+    "old_price": null,
+    "image": "menu_photos/2026/cookieDePrata-200.png",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 16,
+  "fields": {
+    "name": "Cookie de Bronze: Ninho com Nutella",
+    "category": 7,
+    "description": "Irresist�vel, viciante e agora oficialmente premiado! O Ninho com Nutella garantiu seu lugar no p�dio do Cookie de Ouro 2024. Com sua massa de chocolate irresist�vel, recheio cremoso de leite Ninho e aquela Nutella que derrete cora��es, ele � a combina��o perfeita que conquistou o terceiro lugar nos",
+    "price": "13.50",
+    "old_price": null,
+    "image": "menu_photos/2026/cookieDeBronze-200.png",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 17,
+  "fields": {
+    "name": "Cookie Tradicional Chocolatudo",
+    "category": 9,
+    "description": "Prepare-se para se apaixonar! Nosso Chocolatudo � mais do que um cookie, � uma experi�ncia �nica. A massa macia e �mida, repleta de peda�os de chocolate de v�rios tipos, derrete na boca e te leva para o para�so do chocolate. Ideal para os momentos em que voc� precisa de um abra�o saboroso.",
+    "price": "11.70",
+    "old_price": null,
+    "image": "menu_photos/2026/chocolatudo-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 18,
+  "fields": {
+    "name": "Cookie Tradicional New York",
+    "category": 9,
+    "description": "Descubra o segredo do nosso cookie mais amado! Nosso Cookie Tradicional New York � a porta de entrada para um mundo de sabores. Com uma massa irresist�vel e peda�os generosos de chocolate e nozes, ele � a pedida perfeita para os amantes de cookies que buscam uma experi�ncia aut�ntica e deliciosa.",
+    "price": "11.70",
+    "old_price": null,
+    "image": "menu_photos/2026/newYork-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 19,
+  "fields": {
+    "name": "Cookie Tradicional Red",
+    "category": 9,
+    "description": "Prepare-se para se apaixonar! Nosso Cookie Tradicional Red � mais do que um cookie, � uma experi�ncia inesquec�vel. A massa macia e �mida, com aquele toque de vermelho ic�nico, e os peda�os de chocolate branco derretido na boca te levar�o para o para�so dos sabores.",
+    "price": "11.70",
+    "old_price": null,
+    "image": "menu_photos/2026/redTradicional-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 20,
+  "fields": {
+    "name": "Marmita de Cookie Brookie",
+    "category": 10,
+    "description": "Brookie = Brownie + Cookie. Por baixo, um brownie bem molhadinho e chocolatudo. Por cima, nossa massa de cookie com gotas de chocolate, assada no ponto. Duas camadas, zero enrola��o. Apenas puro prazer em cada mordida.",
+    "price": "13.50",
+    "old_price": null,
+    "image": "menu_photos/2026/IMG_2539.JPG",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 21,
+  "fields": {
+    "name": "Marmita de Cookie Brigadeiro",
+    "category": 10,
+    "description": "A sua dose di�ria de felicidade, agora em tamanho fam�lia! Nossa Marmita de Cookie Brigadeiro � a op��o ideal para satisfazer seus desejos por doces. Um cookie gigante, macio por dentro e crocante por fora, recehado com um brigadeiro irresist�vel. Perfeito para levar para onde quiser e compartilhar",
+    "price": "16.20",
+    "old_price": null,
+    "image": "menu_photos/2026/marmitaBrigadeiro-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 22,
+  "fields": {
+    "name": "Marmita de Cookie Red Velvet",
+    "category": 10,
+    "description": "A tradi��o reinventada! Nossa Marmita de Cookie Red Velvet � uma releitura do nosso cookie mais vendido, com um toque a mais de cream cheese e chocolate branco. Uma combina��o perfeita entre o cl�ssico e o moderno, que vai conquistar o seu paladar.",
+    "price": "20.70",
+    "old_price": null,
+    "image": "menu_photos/2026/marmita-red-velvet.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 23,
+  "fields": {
+    "name": "Marmita de Cookie Ninho com Nutella",
+    "category": 10,
+    "description": "A dupla perfeita, agora em um novo formato! Nossa Marmita de Cookie Ninho com Nutella � a combina��o perfeita entre o leite Ninho e a Nutella, agora em um formato ainda mais pr�tico e delicioso. A massa de chocolate macia e crocante completa essa combina��o irresist�vel.",
+    "price": "20.70",
+    "old_price": null,
+    "image": "menu_photos/2026/marmita-ninho-nutella300.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 24,
+  "fields": {
+    "name": "Marmita de Cookie Nutella",
+    "category": 10,
+    "description": "Uma explos�o de sabor para os apaixonados pelo creme de avel� mais aut�ntico do mundo! Camadas generosas da nossa exclusiva massa de cookie caseira, recheada com Nutella cremosa, finalizada com gotas de chocolate crocantes. Perfeita para dividir (ou n�o...)",
+    "price": "22.50",
+    "old_price": null,
+    "image": "menu_photos/2026/marmita-nutella.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 25,
+  "fields": {
+    "name": "Chewiezitos Chocolate",
+    "category": 11,
+    "description": "Os amantes de chocolate v�o se apaixonar! Essa por��o traz 10 mini cookies feitos com nossa massa de chocolate intensa e peda�os que derretem na boca. Pequenos no tamanho, gigantes no sabor!",
+    "price": "13.95",
+    "old_price": null,
+    "image": "menu_photos/2026/chewiezitoChocolate-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 26,
+  "fields": {
+    "name": "Chewiezitos Baunilha",
+    "category": 11,
+    "description": "O cl�ssico ficou ainda melhor! Agora voc� pode aproveitar uma por��o exclusiva dos nossos mini cookies de baunilha, feitos com nossa massa especial, crocante por fora e macia por dentro. Uma explos�o de sabor em cada mordida!",
+    "price": "13.95",
+    "old_price": null,
+    "image": "menu_photos/2026/chewiezitosBaunilha-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 27,
+  "fields": {
+    "name": "Chewiezitos Red",
+    "category": 11,
+    "description": "O charme do red velvet agora em vers�o mini! Uma por��o com 10 unidades dessa del�cia de sabor suave e levemente amanteigado, com aquele toque aveludado irresist�vel. Perfeito para quem ama um cookie sofisticado e cheio de personalidade!",
+    "price": "13.95",
+    "old_price": null,
+    "image": "menu_photos/2026/chewiezitosRed-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.menuitem",
+  "pk": 28,
+  "fields": {
+    "name": "Copo Gelado Ninho com Brigadeiro",
+    "category": 12,
+    "description": "Uma explos�o de sabores! Camadas irresist�veis de mousse de leite Ninho, peda�os dos nossos cookies caseiros e exclusivos, base de brigadeiro cremoso, mousse de chocolate e granulados crocantes para finalizar. A op��o perfeita para dias mais quentes",
+    "price": "17.00",
+    "old_price": null,
+    "image": "menu_photos/2026/copoGelado-200.jpg",
+    "is_available": true
+  }
+},
+{
+  "model": "menu.stock",
+  "pk": 3,
+  "fields": {
+    "menu_item": 2,
+    "quantity": 4
+  }
+},
+{
+  "model": "menu.stock",
+  "pk": 4,
+  "fields": {
+    "menu_item": 1,
+    "quantity": 4
+  }
+},
+{
+  "model": "menu.complement",
+  "pk": 1,
+  "fields": {
+    "name": "Cookie Tradicional New York",
+    "price": "0.00",
+    "description": "",
+    "is_active": true
+  }
+},
+{
+  "model": "menu.complement",
+  "pk": 2,
+  "fields": {
+    "name": "Cookie Tradicional Chocolatudo",
+    "price": "0.00",
+    "description": "",
+    "is_active": true
+  }
+},
+{
+  "model": "menu.complement",
+  "pk": 3,
+  "fields": {
+    "name": "Cookie Tradicional Red",
+    "price": "0.00",
+    "description": "",
+    "is_active": true
+  }
+},
+{
+  "model": "menu.complementgroup",
+  "pk": 1,
+  "fields": {
+    "menu_item": 9,
+    "name": "Escolha seus cookies:",
+    "min_quantity": 3,
+    "max_quantity": 3,
+    "complements": [
+      1,
+      2,
+      3
+    ]
+  }
+}
+]
