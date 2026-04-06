@@ -25,7 +25,7 @@ class Category(models.Model):
 class MenuItem(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    description = models.TextField(max_length=300, blank=False, null=False)
+    description = models.TextField(max_length=600, blank=False, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, validators=[MinValueValidator(0.01)])
     old_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to='menu_photos/%Y/', blank=False, null=False)
@@ -76,8 +76,8 @@ class Complement(models.Model):
 class ComplementGroup(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=False, null=False)
-    min_quantity = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)])
-    max_quantity = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(1)])
+    min_quantity = models.IntegerField(default=0, blank=False, null=False, validators=[MinValueValidator(0)])
+    max_quantity = models.IntegerField(default=1, blank=False, null=False, validators=[MinValueValidator(1)])
     complements = models.ManyToManyField(Complement)
 
     def __str__(self):
