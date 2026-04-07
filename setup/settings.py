@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.menu.apps.MenuConfig',
+    'apps.users.apps.UsersConfig',
     'rest_framework',
     'drf_spectacular',
     'drf_spectacular_sidecar',
@@ -153,4 +154,4 @@ SPECTACULAR_SETTINGS = {
 
 # Users
 
-#AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.CustomUser'
