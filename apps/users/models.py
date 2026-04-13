@@ -14,7 +14,8 @@ class Address(models.Model):
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='addresses')
 
-    cep = models.CharField(max_length=9) # TO-DO: CEP is the zip code in Brazil. if it is the first field to be filled, make that the other ones be automatically filled based on its value
+    cep = models.CharField(max_length=9, null=False, blank=False) # CEP is the zip code in Brazil. 
+    # TO-DO: if it is the first field to be filled, make that the other ones be automatically filled based on its value
 
     street = models.CharField(max_length=255)
     number = models.CharField(max_length=20)
