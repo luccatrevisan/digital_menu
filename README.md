@@ -2,7 +2,9 @@
 # digital_menu - Cookie Management System
 (Literal cookies. Not website cookies.)
 
-A digital menu system built with Django to manage my handmade cookie business in Brazil.
+A digital menu system built with Django to manage my handmade cookie business in Brazil. Built to replace third-party delivery platforms and eliminate commission costs. 
+
+Developed with Python, Django and PostgreSQL, the system features 14 endpoints, JWT authentication, relational data modeling and Swagger/OpenAPI documentation. The project includes a SQLite to PostgreSQL migration in a production environment, with a roadmap covering Celery, Redis, Stripe, Docker and CI/CD pipeline.
 
 ## Roadmap
 This project follows a structured approach, divided into logical tiers, from data modeling to DevOps. Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
@@ -19,7 +21,7 @@ I'm also tracking tasks on a Notion Kanban board, where you can see my live work
 
 ## Tech Stack
 
-Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git • Basic HTML, CSS and Javascript
+Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git • HTML, CSS and Javascript
 
 ## Quick Start
 ```bash
@@ -55,8 +57,12 @@ python manage.py runserver
 
 ## Key Decisions
 
-**DecimalField for prices:** FloatField has precision errors in bigger scale (if there is even a cent wrong, it could mean incorrect information). DecimalField ensures that problem doesn't happen.  
-**1:N Category→MenuItem:** Simplicity over flexibility. Can refactor to ManyToMany if needed.
+**DecimalField for prices:** FloatField has precision errors at scale — even a one-cent discrepancy means incorrect financial data. DecimalField guarantees exact representation for monetary values.
+**1:N Category→MenuItem:** Simplicity over flexibility. A single category per item covers the current use case. Can refactor to ManyToMany if the business requires it.
+**JWT over DRF's built-in TokenAuthentication:** JWT validates the token by verifying its signature, without hitting the database on every request. Better for scalability and more appropriate for stateless REST APIs.
+**SessionAuthentication kept alongside JWT:** Primarily kept for Django Admin compatibility. Not strictly necessary for the API itself, but removing it would break the admin interface authentication flow.
+**BearerAuth configured on Swagger:** After protecting endpoints with IsAuthenticated, Swagger required authentication to test routes. Configured BearerAuth on drf-spectacular to allow JWT to be sent via the Authorization header directly from the Swagger UI.
+**SQLite → PostgreSQL migration via fixtures:** Used dumpdata to export data to a JSON backup file, manually fixed encoding issues caused by accented characters, then restored with loaddata. Chosen over a direct database dump for simplicity and portability across environments.
 
 ## Documentation
 
