@@ -63,6 +63,7 @@ python manage.py runserver
 **SessionAuthentication kept alongside JWT:** Primarily kept for Django Admin compatibility. Not strictly necessary for the API itself, but removing it would break the admin interface authentication flow.
 **BearerAuth configured on Swagger:** After protecting endpoints with IsAuthenticated, Swagger required authentication to test routes. Configured BearerAuth on drf-spectacular to allow JWT to be sent via the Authorization header directly from the Swagger UI.
 **SQLite → PostgreSQL migration via fixtures:** Used dumpdata to export data to a JSON backup file, manually fixed encoding issues caused by accented characters, then restored with loaddata. Chosen over a direct database dump for simplicity and portability across environments.
+**Custom IsAdminOrReadOnly permission:** Instead of using built-in AllowAny and IsAdminUser per view, created a reusable permission class that varies access based on the HTTP method. GET requests are public, write operations require staff status. Avoids repetition across all viewsets.
 
 ## Documentation
 
