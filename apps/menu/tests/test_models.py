@@ -1,5 +1,6 @@
 from apps.menu.models import MenuItem, Stock, Category, Complement, ComplementGroup
 from decimal import Decimal
+from django.core.exceptions import ValidationError
 import pytest
 
 
@@ -84,4 +85,30 @@ def test_deletion_handling(menu_item, stock):
     assert menu_item.is_available == True
 
 
+'''tests the stock quantity for negative values'''
+def test_negative_quantity_stock(stock):
+    with pytest.raises(ValidationError):
+        stock.quantity = -4
+        stock.full_clean()    
+
+
 '''complement and complementgroup'''
+@pytest.fixture
+def complement(db):
+    return Complement.objects.create(name="Ouro 1")
+
+
+@pytest.fixture
+def complement_group(db, menu_item, complement):
+    complement_group = ComplementGroup.objects.create(name="Ourinhos", menu_item=menu_item, min_quantity=3, max_quantity=3)
+
+    complement_group.complements.add(complement)
+    complement_group.save()
+
+    return complement_group
+
+
+def test_min_quantity_higher(complement_group):
+    with pytest.raises(ValidationError):
+        complement_group.min_quantity = 5
+        complement_group.save()
