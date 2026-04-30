@@ -1,0 +1,27 @@
+
+{% block content %}
+<!-- Floating Cart -->
+<div class="carrinho-flutuante" onclick="abrirCarrinho()">
+    🛒 Carrinho
+    <span class="badge-carrinho" id="badgeCarrinho">0</span>
+</div>
+
+<!-- Cart Modal -->
+<div id="modalCarrinho" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>🛒 Seu Pedido</h2>
+            <span class="close" onclick="fecharCarrinho()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="itensCarrinho"></div>
+            <div class="total-carrinho">
+                <div class="total-valor">Total: R$ <span id="totalCarrinho">0,00</span></div>
+                <button class="btn-whatsapp" onclick="enviarWhatsApp()">
+                    📱 Finalizar no WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

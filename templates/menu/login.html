@@ -1,0 +1,31 @@
+{% extends 'menu/base.html' %}
+
+{% block content %}
+<section id="login">
+    <div id="imagem">
+    </div>
+    <div id="formulario">
+        <h1>Login</h1>
+        <p>Seja bem-vindo(a). Faça login para acessar sua conta e poder fazer o seu pedido.</p>
+        <form action="login.js" method="post" autocomplete="on">
+            <p class="campo">
+                <span class="material-symbols-outlined">person</span>
+                <input type="email" name="user" id="iuser" placeholder="Seu e-mail" autocomplete="email" required>
+                <label for="iuser">Email</label>
+            </p>
+
+            <p class="campo">
+                <span class="material-symbols-outlined">key</span>
+                <input type="password" name="senha" id="isenha" placeholder="Sua senha" autocomplete="current-password" required minlength="8">
+                <label for="isenha">Senha</label>
+            </p>
+
+            <p>
+                <input type="submit" value="Entrar">
+                <a href="esqueci.html" class="botao">Esqueci a Senha
+                <span class="material-symbols-outlined">mail</span></a>
+            </p>
+        </form>
+    </div>
+</section>
+{% endblock %}

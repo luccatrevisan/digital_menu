@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets, generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from apps.menu.serializers import CategorySerializer, MenuItemSerializer, StockSerializer, MenuItemWithStockSerializer, MenuItemByCategorySerializer, ComplementSerializer, ComplementGroupSerializer, ComplementByGroupSerializer
 
@@ -75,8 +75,7 @@ class MenuItemWithStockViewSet(generics.ListAPIView):
 
 
 class MenuItemByCategoryViewSet(generics.ListAPIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     serializer_class = MenuItemByCategorySerializer
     queryset = Category.objects.prefetch_related("menuitem_set__complementgroup_set__complements").all()
