@@ -18,4 +18,4 @@ urlpatterns = [
     path("api/item-by-category/", MenuItemByCategoryViewSet.as_view(), name="item-by-category"),
     path("api/item-with-stock/", MenuItemWithStockViewSet.as_view(), name="item-with-stock"),
     path("api/complement-by-group", ComplementByGroupViewSet.as_view(), name="complement-by-group"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

@@ -1,0 +1,49 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<section id="register">
+    <div id="image">
+    </div>
+    <div id="formulario">
+        <h1>Cadastro</h1>
+        <p>Crie sua conta para começar a pedir seus cookies</p>
+
+        <!-- this form will be handled via JavaScript (API/JWT flow) -->
+        <form id="register-form" method="post" autocomplete="on">
+            
+            <p class="campo">
+                <span class="material-symbols-outlined">person</span>
+                <input type="text" name="username" id="iusername" placeholder="Username" required>
+                <label for="iusername">Nome</label>
+            </p>
+
+            <p class="campo">
+                <span class="material-symbols-outlined">mail</span>
+                <input type="email" name="email" id="iemail" placeholder="Your email" autocomplete="email" required>
+                <label for="iemail">Email</label>
+            </p>
+
+            <p class="campo">
+                <span class="material-symbols-outlined">key</span>
+                <input type="password" name="password" id="ipassword" placeholder="Your password" required minlength="8">
+                <label for="ipassword">Senha</label>
+            </p>
+
+            <p class="campo">
+                <span class="material-symbols-outlined">key</span>
+                <input type="password" name="confirm_password" id="iconfirm_password" placeholder="Confirm password" required minlength="8">
+                <label for="iconfirm_password">Confirme a senha</label>
+            </p>
+
+            <p>
+                <input type="submit" value="Create Account">
+                Já possui uma conta?
+                <a href="{% url 'login' %}" class="botao">
+                    <span class="material-symbols-outlined">Login</span>
+                </a>
+            </p>
+
+        </form>
+    </div>
+</section>
+{% endblock %}

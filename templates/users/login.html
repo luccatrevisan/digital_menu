@@ -1,4 +1,4 @@
-{% extends 'menu/base.html' %}
+{% extends 'shared/base.html' %}
 
 {% block content %}
 <section id="login">
@@ -6,7 +6,7 @@
     </div>
     <div id="formulario">
         <h1>Login</h1>
-        <p>Seja bem-vindo(a). Faça login para acessar sua conta e poder fazer o seu pedido.</p>
+        <p>Faça login para acessar sua conta e poder fazer o seu pedido.</p>
         <form action="login.js" method="post" autocomplete="on">
             <p class="campo">
                 <span class="material-symbols-outlined">person</span>
@@ -22,8 +22,11 @@
 
             <p>
                 <input type="submit" value="Entrar">
-                <a href="esqueci.html" class="botao">Esqueci a Senha
                 <span class="material-symbols-outlined">mail</span></a>
+            </p>
+            <p>
+                Não tem uma conta?
+                <a href="{% url 'register' %}">Cadastre-se</a>
             </p>
         </form>
     </div>
