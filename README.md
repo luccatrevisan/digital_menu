@@ -1,13 +1,18 @@
+# Digital Menu - Backend API for Real-World Order Management
 
-# digital_menu - Cookie Management System
-(Literal cookies. Not website cookies.)
+A backend system built with Django and Django REST Framework to manage a real-world cookie business operation.
 
-A digital menu system built with Django to manage my handmade cookie business in Brazil. Built to replace third-party delivery platforms and eliminate commission costs. 
+This API was designed to replace third-party delivery platforms, reducing operational costs by approximately R$30,000/year and giving full control over orders, products, and business logic.
 
-Developed with Python, Django and PostgreSQL, the system features 14 endpoints, JWT authentication, relational data modeling and Swagger/OpenAPI documentation. The project includes a SQLite to PostgreSQL migration in a production environment, with a roadmap covering Celery, Redis, Stripe, Docker and CI/CD pipeline.
+## Use Case
+
+This system is actively used to support a real business workflow, processing weekly orders and serving as the backend foundation for a live digital menu.
+
+The business context directly influenced the system design, including pricing accuracy, product combinations, and inventory structure.
 
 ## Roadmap
-This project follows a structured approach, divided into logical tiers, from data modeling to DevOps. Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
+Core functionality is already implemented and in use, with ongoing improvements focused on scalability and production readiness.
+Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
 
 ![ROADMAP](docs/img/roadmap-progress.png)
 
@@ -21,7 +26,13 @@ I'm also tracking tasks on a Notion Kanban board, where you can see my live work
 
 ## Tech Stack
 
-Django 5.1 • Python 3.13 • PostgreSQL • DRF • Git • HTML, CSS and Javascript
+- Python 3.13  
+- Django / Django REST Framework  
+- PostgreSQL  
+- Swagger / OpenAPI  
+- Git  
+
+Integrated with a simple frontend (HTML, CSS, JavaScript) for real-world usage.
 
 ## Quick Start
 ```bash
@@ -55,7 +66,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## Key Decisions
+## Technical Decisions
 
 - **DecimalField for prices:** FloatField has precision errors at scale — even a one-cent discrepancy means incorrect financial data. DecimalField guarantees exact representation for monetary values.
 - **1:N Category→MenuItem:** Simplicity over flexibility. A single category per item covers the current use case. Can refactor to ManyToMany if the business requires it.
@@ -67,11 +78,11 @@ python manage.py runserver
 
 ## Documentation
 
-Detailed DEVLOGs with decisions, challenges, and learnings (in Brazilian Portuguese): `/docs/devlogs/`
+Detailed development logs documenting decisions, challenges, and trade-offs (mostly in Brazilian Portuguese): `/docs/devlogs/`
 
 ## ✉️ Contact
 
 Lucca - [LinkedIn](https://www.linkedin.com/in/lucca-trevisan-86a181378/) | luccatrevisandev@gmail.com
 
 ---
-**MIT License • Built with focus on learning and real-world problem solving**
+**MIT License • Built with a focus on real-world problem solving, backend architecture, and practical system design.**

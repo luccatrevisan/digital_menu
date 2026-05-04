@@ -1,35 +1,17 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
 {% include 'menu/header.html' %}
 {% include 'partials/cart_modal.html' %}
-<section class="categoria-produto">
-    <h2>Cookie de Ouro 2024: Os mais vendidos</h2>
-    <section class="container-produto">
-        <div class="item-produto">
-            <img src="imagens/cookieDeOuro-300.png" alt="Cookie de Ouro: Tradicional New York" width="200px">
-            <h3>Cookie de Ouro: Tradicional New York</h3>
-            <p>O favorito do ano e campeão absoluto do Cookie de Ouro 2024! Nosso Tradicional New York é o verdadeiro rei dos cookies, aclamado por todos que se apaixonaram por sua massa irresistível, repleta de pedaços generosos de chocolate e nozes.</p>
-            <p><strong>R$13,00</strong></p>
-            <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Ouro: Tradicional New York', 13.00)">Adicionar ao Carrinho</button>
-        </div>
 
-        <div class="item-produto">
-            <img src="imagens/cookieDePrata-300.png" alt="Cookie de Prata: Tradicional Chocolatudo" width="200px">
-            <h3>Cookie de Prata: Tradicional Chocolatudo</h3>
-            <p>Prepare-se para se apaixonar pelo vice-campeão absoluto do Cookie de Ouro 2024! Nosso Chocolatudo é mais do que um cookie, é uma experiência única. A massa macia e úmida, repleta de pedaços de chocolate de vários tipos, derrete na boca e te leva direto para o paraíso do chocolate. Um abraço saboroso que conquistou o segundo lugar nos corações e pedidos dos nossos clientes durante todo o ano de 2024.</p>
-            <p><strong>R$13,00</strong></p>
-            <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Prata: Tradicional Chocolatudo', 13.00)">Adicionar ao Carrinho</button>
-        </div>
 
-        <div class="item-produto">
-            <img src="imagens/cookieDeBronze-300.png" alt="Cookie de Bronze: Ninho com Nutella" width="200px">
-            <h3>Cookie de Bronze: Ninho com Nutella</h3>
-            <p>Irresistível, viciante e agora oficialmente premiado! O Ninho com Nutella garantiu seu lugar no pódio do Cookie de Ouro 2024. Com sua massa de chocolate irresistível, recheio cremoso de leite Ninho e aquela Nutella que derrete corações, ele é a combinação perfeita que conquistou o terceiro lugar nos pedidos mais amados do ano. Cuidado: é impossível comer só um!</p>
-            <p><strong>R$15,00</strong></p>
-            <button class="botao-carrinho" onclick="adicionarAoCarrinho('Cookie de Bronze: Ninho com Nutella', 15.00)">Adicionar ao Carrinho</button>
-        </div>
-    </section>
+<section id="menu-container">
+    
 </section>
+
+<script src="{% static 'menu/js/main.js' %}"></script>
+<script src="{% static 'menu/js/script.js' %}"></script>
+
 {% include 'menu/footer.html' %}
 {% endblock %}
