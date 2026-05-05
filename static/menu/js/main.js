@@ -1,5 +1,6 @@
 const url = "http://127.0.0.1:8000/api/item-by-category/"
 
+
 async function apiFetch(url){
     try{
         const response = await fetch(url, {
@@ -10,7 +11,13 @@ async function apiFetch(url){
         });
 
         if (!response.ok){
-            throw new Error("Could not fetch resource");
+            if (response.status === 404){
+                throw new Error("Não foi possível buscar informações do cardápio.")
+            }
+            if (response.status === 401){
+                throw new Error("Usuário não autorizado. Tente fazer login")
+            }
+            throw new Error(`Erro ao carregar cardápio`);
         }
 
         const data = await response.json();
@@ -24,6 +31,7 @@ async function apiFetch(url){
 
 
 function renderMenu(data){
+
     const container = document.getElementById("menu-container");
 
     container.innerHTML = "";
@@ -82,11 +90,25 @@ function renderMenu(data){
 
 
 async function init(){
+
+    const container = document.getElementById("menu-container")
+
     try{
+        container.innerHTML = `<p>Carregando cardápio...</p>`;
+
         const data = await apiFetch(url);
+
+        if (!data || data.length === 0){
+            container.innerHTML = `<p>Nenhum item disponível no momento.</p>`;
+            return
+        }
+
         renderMenu(data);
+
     } catch(error){
-        console.error(error);
+        container.innerHTML = `
+        <p>Erro ao carregar informações do cardápio</p>
+        <button onclick="init()"> Tentar novamente</button>`;
     }
 }
 
