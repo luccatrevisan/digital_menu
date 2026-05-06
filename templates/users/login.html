@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
 <section id="login">
@@ -7,23 +8,25 @@
     <div id="formulario">
         <h1>Login</h1>
         <p>Faça login para acessar sua conta e poder fazer o seu pedido.</p>
-        <form action="login.js" method="post" autocomplete="on">
+        <form autocomplete="on" id="login-form">
+            {% csrf_token %}
             <p class="campo">
                 <span class="material-symbols-outlined">person</span>
-                <input type="email" name="user" id="iuser" placeholder="Seu e-mail" autocomplete="email" required>
-                <label for="iuser">Email</label>
+                <input type="username" name="user" id="iuser" placeholder="Nome de usuário" autocomplete="username" required>
+                <label for="iuser">Usuário</label>
             </p>
 
             <p class="campo">
                 <span class="material-symbols-outlined">key</span>
-                <input type="password" name="senha" id="isenha" placeholder="Sua senha" autocomplete="current-password" required minlength="8">
-                <label for="isenha">Senha</label>
+                <input type="password" name="password" id="ipassword" placeholder="Sua senha" autocomplete="current-password" required minlength="8">
+                <label for="ipassword">Senha</label>
             </p>
 
             <p>
                 <input type="submit" value="Entrar">
                 <span class="material-symbols-outlined">mail</span></a>
             </p>
+            <p id="login-error" style="color: red;"></p>
             <p>
                 Não tem uma conta?
                 <a href="{% url 'register' %}">Cadastre-se</a>
@@ -31,4 +34,5 @@
         </form>
     </div>
 </section>
+<script src="{% static 'menu/js/user.js' %}"></script>
 {% endblock %}

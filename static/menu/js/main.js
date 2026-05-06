@@ -3,10 +3,13 @@ const url = "http://127.0.0.1:8000/api/item-by-category/"
 
 async function apiFetch(url){
     try{
+        const token = localStorage.getItem("access");
+
         const response = await fetch(url, {
             method : "GET",
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "Authorization" : `Bearer ${token}`
             }
         });
 
@@ -90,7 +93,6 @@ function renderMenu(data){
 
 
 async function init(){
-
     const container = document.getElementById("menu-container")
 
     try{

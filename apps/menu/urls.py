@@ -1,6 +1,4 @@
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 from apps.menu.views import index, CategoryViewSet, MenuItemViewSet, StockViewSet, MenuItemWithStockViewSet, MenuItemByCategoryViewSet, ComplementViewSet, ComplementGroupViewSet, ComplementByGroupViewSet
 from rest_framework import routers
 
