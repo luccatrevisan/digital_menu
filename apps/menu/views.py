@@ -16,7 +16,7 @@ def index(request):
     return render(request, "menu/index.html")
 
 
-''' viewsets '''
+''' API viewsets '''
 class CategoryViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAdminOrReadOnly]

@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20) 
 
 
 class Address(models.Model):

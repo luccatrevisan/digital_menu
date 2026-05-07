@@ -7,4 +7,4 @@ class AddressAdmin(admin.ModelAdmin):
 
 admin.site.register(Address, AddressAdmin)
 
-admin.site.register(CustomUser)
+admin.site.register(CustomUser) # TO-DO: for user management, it can be useful to customize the user admin page

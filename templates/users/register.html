@@ -8,7 +8,6 @@
         <h1>Cadastro</h1>
         <p>Crie sua conta para começar a pedir seus cookies</p>
 
-        <!-- this form will be handled via JavaScript (API/JWT flow) -->
         <form id="register-form" method="post" autocomplete="on">
             
             <p class="campo">
@@ -21,6 +20,12 @@
                 <span class="material-symbols-outlined">mail</span>
                 <input type="email" name="email" id="iemail" placeholder="Your email" autocomplete="email" required>
                 <label for="iemail">Email</label>
+            </p>
+
+            <p class="campo">
+                <span class="material-symbols-outlined">phone</span>
+                <input type="tel" name="phone_number" id="iphone_number" placeholder="21999993333" autocomplete="tel" required>
+                <label for="iphone">Celular</label>
             </p>
 
             <p class="campo">
@@ -46,4 +51,6 @@
         </form>
     </div>
 </section>
+<script src="{% static 'menu/js/register.js' %}"></script>
+
 {% endblock %}
