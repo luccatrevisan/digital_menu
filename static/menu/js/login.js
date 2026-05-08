@@ -1,30 +1,6 @@
-const urlToken = "http://127.0.0.1:8000/api/token/";
+export const urlToken = "http://127.0.0.1:8000/api/token/";
 
-const loginForm = document.getElementById("login-form");
-
-loginForm.addEventListener("submit", async function(event){
-    event.preventDefault();
-
-    const username = document.getElementById("iuser").value;
-    const password = document.getElementById("ipassword").value;
-
-    try {
-        await login(urlToken, username, password);
-        window.location.href = "/";
-    } 
-    catch(error) {
-        const errorContainer = document.getElementById("login-error");
-
-        if (error.message == "invalid_credentials") {
-            errorContainer.textContent = "Usuário ou senha inválidos";
-        } else {
-            errorContainer.textContent = "Erro ao fazer login. Tente novamente.";
-        }
-    }
-});
-
-
-async function login(url, username, password){
+export async function login(url, username, password){
     try{
         const response = await fetch(url, {
             method : "POST",
@@ -47,7 +23,7 @@ async function login(url, username, password){
 
         const data = await response.json();
         localStorage.setItem("access", data.access);
-        return true;
+        return;
 
     } catch(error){
         console.error(error);

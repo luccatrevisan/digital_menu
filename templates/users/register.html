@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
 <section id="register">
@@ -8,8 +9,8 @@
         <h1>Cadastro</h1>
         <p>Crie sua conta para começar a pedir seus cookies</p>
 
-        <form id="register-form" method="post" autocomplete="on">
-            
+        <form id="register-form" autocomplete="on">
+            {% csrf_token %}
             <p class="campo">
                 <span class="material-symbols-outlined">person</span>
                 <input type="text" name="username" id="iusername" placeholder="Username" required>
@@ -41,16 +42,18 @@
             </p>
 
             <p>
-                <input type="submit" value="Create Account">
+                <input type="submit" value="Cadastrar">
+                <span class="material-symbols-outlined">mail</span></a>
+            </p>
+            <p id="register-error" style="color: red;"></p>
+            <p>
                 Já possui uma conta?
                 <a href="{% url 'login' %}" class="botao">
                     <span class="material-symbols-outlined">Login</span>
                 </a>
             </p>
-
         </form>
     </div>
 </section>
-<script src="{% static 'menu/js/register.js' %}"></script>
-
+<script type="module" src="{% static 'menu/js/register.js' %}"></script>
 {% endblock %}
