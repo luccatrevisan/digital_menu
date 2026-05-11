@@ -27,16 +27,7 @@ registerForm.addEventListener("submit", async function(event){
 
     } catch(error){
         const errorContainer = document.getElementById("register-error");
-
-        if (error.message == "user_registered"){
-            errorContainer.textContent = "Este nome de usuário já foi cadastrado.";
-        } else if (error.message == "email_registered"){
-            errorContainer.textContent = "Este email já foi cadastrado.";
-        } else if (error.message == "weak_password"){
-            errorContainer.textContent = "Tente uma senha mais forte.";
-        } else {
-            errorContainer.textContent = "Erro ao realizar cadastro. Tente novamente mais tarde."
-        }
+        errorContainer.textContent = error.message;
     }
 
 })
@@ -61,18 +52,16 @@ async function register(url, username, email, phoneNumber, password){
         if (!response.ok){
             const errorData = await response.json();
             if (errorData.username){
-                throw new Error("user_registered");
+                throw new Error(errorData.username[0]);
+            } else if (errorData.email){
+                throw new Error(errorData.email[0]);
+            } else if (errorData.password){
+                throw new Error(errorData.password[0]);
+            } else if (errorData.phone_number) {
+                throw new Error("Usuário com este número de celular já existe.")
+            } else {
+                throw new Error("Erro ao cadastrar usuário");
             }
-
-            if (errorData.email){
-                throw new Error("email_registered");
-            }
-
-            if (errorData.password){
-                throw new Error("weak_password");
-            }
-
-            throw new Error("Erro ao cadastrar usuário");
         }
 
         return;
