@@ -64,8 +64,6 @@ async function register(url, username, email, phoneNumber, password){
             }
         }
 
-        return;
-
     } catch(error){
         throw error;
     }
