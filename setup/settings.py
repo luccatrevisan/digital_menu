@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.menu.apps.MenuConfig',
     'apps.users.apps.UsersConfig',
+    'apps.orders.apps.OrdersConfig',
     'rest_framework',
     'drf_spectacular',
     'drf_spectacular_sidecar',

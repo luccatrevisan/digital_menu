@@ -11,20 +11,17 @@
         <form autocomplete="on" id="login-form">
             {% csrf_token %}
             <p class="campo">
-                <span class="material-symbols-outlined">person</span>
-                <input type="username" name="user" id="iuser" placeholder="Nome de usuário" autocomplete="username" required>
                 <label for="iuser">Usuário</label>
+                <input type="username" name="user" id="iuser" placeholder="Nome de usuário" autocomplete="username" required>
             </p>
 
             <p class="campo">
-                <span class="material-symbols-outlined">key</span>
-                <input type="password" name="password" id="ipassword" placeholder="Sua senha" autocomplete="current-password" required minlength="8">
                 <label for="ipassword">Senha</label>
+                <input type="password" name="password" id="ipassword" placeholder="Sua senha" autocomplete="current-password" required minlength="8">
             </p>
 
             <p>
                 <input type="submit" value="Entrar">
-                <span class="material-symbols-outlined">mail</span></a>
             </p>
             <p id="login-error" style="color: red;"></p>
             <p>

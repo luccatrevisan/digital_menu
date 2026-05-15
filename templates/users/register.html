@@ -12,38 +12,32 @@
         <form id="register-form" autocomplete="on">
             {% csrf_token %}
             <p class="campo">
-                <span class="material-symbols-outlined">person</span>
-                <input type="text" name="username" id="iusername" placeholder="Username" required>
                 <label for="iusername">Nome</label>
+                <input type="text" name="username" id="iusername" placeholder="Username" required>
             </p>
 
             <p class="campo">
-                <span class="material-symbols-outlined">mail</span>
-                <input type="email" name="email" id="iemail" placeholder="Your email" autocomplete="email" required>
                 <label for="iemail">Email</label>
+                <input type="email" name="email" id="iemail" placeholder="Your email" autocomplete="email" required>
             </p>
 
             <p class="campo">
-                <span class="material-symbols-outlined">phone</span>
-                <input type="tel" name="phone_number" id="iphone_number" placeholder="21999993333" autocomplete="tel" required>
                 <label for="iphone">Celular</label>
+                <input type="tel" name="phone_number" id="iphone_number" placeholder="21999993333" autocomplete="tel" required>
             </p>
 
             <p class="campo">
-                <span class="material-symbols-outlined">key</span>
-                <input type="password" name="password" id="ipassword" placeholder="Your password" required minlength="8">
                 <label for="ipassword">Senha</label>
+                <input type="password" name="password" id="ipassword" placeholder="Your password" required minlength="8">
             </p>
 
             <p class="campo">
-                <span class="material-symbols-outlined">key</span>
-                <input type="password" name="confirm_password" id="iconfirm_password" placeholder="Confirm password" required minlength="8">
                 <label for="iconfirm_password">Confirme a senha</label>
+                <input type="password" name="confirm_password" id="iconfirm_password" placeholder="Confirm password" required minlength="8">
             </p>
 
             <p>
                 <input type="submit" value="Cadastrar">
-                <span class="material-symbols-outlined">mail</span></a>
             </p>
             <p id="register-error" style="color: red;"></p>
             <p>
