@@ -48,7 +48,7 @@ class MenuItem(models.Model):
 
 class Stock(models.Model):
     menu_item = models.OneToOneField(MenuItem, on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0)])
+    quantity = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.quantity}"

@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.db import models
 from apps.menu.models import MenuItem, Complement, ComplementGroup
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 
 
 class Order(models.Model):
@@ -32,15 +33,13 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     menu_item = models.ForeignKey(MenuItem, on_delete=models.PROTECT)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2)
 
     def clean(self):
         if self.unit_price < Decimal("0"):
-            raise ValidationError(
-                {"unit_price": "Unit price cannot be negative."}
-            )
+            raise ValidationError("Unit price cannot be negative.")
 
 
     def save(self, *args, **kwargs):
