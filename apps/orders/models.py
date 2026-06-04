@@ -37,7 +37,7 @@ class Order(models.Model):
     delivery_type = models.CharField(max_length=20, choices=DeliveryType.choices, default=DeliveryType.DELIVERY)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=False, blank=False)
 
     # snapshot fields to maintain delivery address data.
     address = models.ForeignKey(Address, on_delete=models.PROTECT, related_name="orders", null=True, blank=True)

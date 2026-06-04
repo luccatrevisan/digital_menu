@@ -75,8 +75,9 @@ function renderMenu(data){
 
                 <button 
                     class="botao-carrinho"
+                    data-item-id="${item.id}"
                     ${!item.is_available ? "disabled" : ""}
-                    onclick="adicionarAoCarrinho('${item.name}', ${item.price})"
+                    onclick="addToCart(${item.id}, '${item.name}', ${item.price})"
                 >
                     ${item.is_available ? "Adicionar ao carrinho" : "Indisponível"}
                 </button>
