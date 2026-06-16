@@ -312,6 +312,9 @@ a:hover {
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
     background-color: var(--bg-secondary);
     margin: 5% auto;
     width: 90%;
@@ -331,6 +334,8 @@ a:hover {
 
 .modal-body {
     padding: 24px;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .close {

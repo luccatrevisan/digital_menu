@@ -10,9 +10,9 @@ class Order(models.Model):
     class Status(models.TextChoices):
         '''
         ORDER STATUSES
-            - PENDING: in practice, its the CART. the user is creating the order.
-            - CONFIRMED: the user finished the order. it may not mean that the user payed for the order, since more problems could happen between confirming and successfully paying. in the future, it opens space to payment-related statuses
-            - PREPARING: everything is ok. cookies going to the oven.
+            - PENDING: the user created the order and is going for the payment
+            - CONFIRMED: the user payed for the order. in the future, it opens space to payment-related statuses
+            - PREPARING: cookies going to the oven.
             - READY: everything is ready to go.
             - DELIVERING: the order left the house.
             - COMPLETED: the order sucessfully arrived to the hands of the customer.
@@ -147,7 +147,7 @@ class OrderItem(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2) 
 
 
     def clean(self):

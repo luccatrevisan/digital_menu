@@ -1,3 +1,4 @@
+const URL = "http://127.0.0.1:8000/api/orders"
 const STORAGE_KEY = "chewie_cart";
 
 let cart = JSON.parse(
@@ -136,6 +137,29 @@ function buildOrderPayload() {
         }))
     };
 }
+
+
+const checkoutButton = document.getElementById("checkout-btn");
+
+if (cart.length === 0) {
+    checkoutButton.disabled = true;
+}
+
+checkoutButton.addEventListener("click", async function() {
+    const payload = buildOrderPayload();
+
+    const response = await fetch("/api/orders/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+            // must have access token. if the customer is not logged in, they mustn't place an order
+        },
+        body: JSON.stringify(payload)
+    })
+
+    cleanCart() // to reset the cart after purchase. TO-DO: update with a message like "your order is being processed"
+});
+
 
 function openCart() {
     document.getElementById('modalCarrinho').style.display = 'block';
