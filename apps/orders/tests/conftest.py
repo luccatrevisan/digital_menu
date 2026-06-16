@@ -1,6 +1,6 @@
 from apps.orders.models import Order, OrderItem
 from apps.users.models import CustomUser, Address
-from apps.menu.models import Category, MenuItem
+from apps.menu.models import Category, MenuItem, Stock
 from decimal import Decimal
 import pytest
 
@@ -20,6 +20,15 @@ def menu_item(db, category):
         description="Muito gostoso", 
         price=Decimal("24.99"), 
         image="docs/img/roadmap.png"
+    )
+
+
+''' menu item's stock '''
+@pytest.fixture
+def stock(db, menu_item):
+    return Stock.objects.create(
+        menu_item=menu_item,
+        quantity=5
     )
 
 

@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from decimal import Decimal
 import pytest
 
+
 ''' valid transitions '''
 def test_confirm_order(order, order_item):
     order.confirm_order()
