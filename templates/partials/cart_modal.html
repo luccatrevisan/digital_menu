@@ -17,6 +17,13 @@
         <div class="modal-body">
             <div id="cartItems"></div>
             <div class="total-carrinho">
+                <p id="login-warning" hidden>
+                    Faça login para concluir seu pedido, acompanhar entregas e acessar seu histórico de compras.
+                    <a href="/login/">Fazer login</a>
+                </p>
+                <p id="minimum-order-warning" hidden style="color:red">
+                    O pedido precisa ultrapassar o limite de R$30,00.
+                </p>
                 <div class="total-valor">Total: R$ <span id="cartTotal">0,00</span></div>
                 <button id="checkout-btn">Finalizar</button>
             </div>

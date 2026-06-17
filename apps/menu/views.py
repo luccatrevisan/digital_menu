@@ -1,13 +1,9 @@
 from django.shortcuts import render
-
 from rest_framework import viewsets, generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
 from apps.menu.serializers import CategorySerializer, MenuItemSerializer, StockSerializer, MenuItemWithStockSerializer, MenuItemByCategorySerializer, ComplementSerializer, ComplementGroupSerializer, ComplementByGroupSerializer
-
 from apps.menu.models import Category, MenuItem, Stock, Complement, ComplementGroup
-
 from apps.menu.permissions import IsAdminOrReadOnly
 
 

@@ -141,23 +141,23 @@ function buildOrderPayload() {
 
 const checkoutButton = document.getElementById("checkout-btn");
 
-if (cart.length === 0) {
-    checkoutButton.disabled = true;
-}
-
 checkoutButton.addEventListener("click", async function() {
     const payload = buildOrderPayload();
+    const accessToken = localStorage.getItem("access");
+
+    if (!accessToken) {
+        document.getElementById("login-warning").hidden = false;
+        return;
+}
 
     const response = await fetch("/api/orders/", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
-            // must have access token. if the customer is not logged in, they mustn't place an order
+            "Content-Type": "application/json",
+            "Authorization" : `Bearer ${accessToken}`
         },
         body: JSON.stringify(payload)
     })
-
-    cleanCart() // to reset the cart after purchase. TO-DO: update with a message like "your order is being processed"
 });
 
 
