@@ -1,7 +1,7 @@
 import { login, urlToken } from "./login.js";
 
 
-const urlRegister = "http://127.0.0.1:8000/api/register/";
+const urlRegister = "/api/register/";
 
 const registerForm = document.getElementById("register-form");
 

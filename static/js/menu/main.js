@@ -1,4 +1,4 @@
-const url = "http://127.0.0.1:8000/api/item-by-category/"
+const url = "/api/item-by-category/"
 
 
 async function apiFetch(url){

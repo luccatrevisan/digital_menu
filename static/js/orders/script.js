@@ -1,4 +1,4 @@
-const URL = "http://127.0.0.1:8000/api/orders"
+const URL = "/api/orders"
 const STORAGE_KEY = "chewie_cart";
 
 let cart = JSON.parse(

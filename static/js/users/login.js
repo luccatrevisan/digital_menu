@@ -1,4 +1,4 @@
-export const urlToken = "http://127.0.0.1:8000/api/token/";
+export const urlToken = "/api/token/";
 
 export async function login(url, username, password){
     try{
