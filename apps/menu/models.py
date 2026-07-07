@@ -28,7 +28,7 @@ class MenuItem(models.Model):
     description = models.TextField(max_length=600, blank=False, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, validators=[MinValueValidator(0.01)])
     old_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    image = models.ImageField(upload_to='menu_photos/%Y/', blank=False, null=False)
+    image = models.CharField(max_length=255)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
