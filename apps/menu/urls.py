@@ -11,7 +11,7 @@ router.register('complement-groups', ComplementGroupViewSet)
 
 
 urlpatterns = [
-    path("", index),
+    path("", index, name="index"),
     path("api/", include(router.urls)),
     path("api/item-by-category/", MenuItemByCategoryViewSet.as_view(), name="item-by-category"),
     path("api/item-with-stock/", MenuItemWithStockViewSet.as_view(), name="item-with-stock"),

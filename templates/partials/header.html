@@ -1,12 +1,13 @@
 {% load static %}
 
 <header>
-    <img src="{% static 'img/logo-sem-fundo100-removebg-preview.png' %}" alt="Chewie Cookies">
+    <img src="{% static 'img/logo-sem-fundo100-removebg-preview.png' %}" style="width: 100px;" alt="Chewie Cookies">
 
     <nav>
         <!-- 
         can evolve to check if the user is logged in (Hello, {name} | My account (My orders etc)) 
         -->
+        <a href="{% url 'index' %}">Inicio</a>
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'register' %}">Cadastro</a> 
     </nav>

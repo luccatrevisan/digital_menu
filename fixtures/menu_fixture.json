@@ -72,7 +72,7 @@
             "description": "O nosso queridinho do verão junto com o nosso Cookie Brigadeiro para refrescar os seus dias quentes de um jeito mais gostoso. A opção perfeita para levar essas duas delícias com desconto.",
             "price": "21.52",
             "old_price": "26.90",
-            "image": "static/img/menu/IMG_1799.JPG",
+            "image": "img/menu/IMG_1799.JPG",
             "is_available": true
             }
     },
@@ -85,7 +85,7 @@
             "description": "Atenção: Este cookie vicia! O nosso Brigadeiro é diferente de tudo o que você já provou. A massa, com granulados crocantes, e o recheio de brigadeiro cremoso formam uma combinação irresistível. Cuidado, pois a textura do brigadeiro é tão cremosa que pode até escapar do cookie na primeira mordida! Uma explosão de sabor que vai te conquistar!",
             "price": "9.90",
             "old_price": null,
-            "image": "static/img/menu/brigadeiro-200.jpg",
+            "image": "img/menu/brigadeiro-200.jpg",
             "is_available": true
             }
     },
@@ -98,7 +98,7 @@
             "description": "O queridinho de 2023 está de volta! Nosso cookie Red Velvet é a explosão de sabor que você procura. A massa aveludada, com um toque de cacau, se une ao brigadeiro de cream cheese mais cremoso que você já provou, criando uma experiência única e irresistível. A combinação entre o cream cheese e o sabor intenso do chocolate branco é simplesmente divina!",
             "price": "13.50",
             "old_price": null,
-            "image": "static/img/menu/redVelvet-200.jpg",
+            "image": "img/menu/redVelvet-200.jpg",
             "is_available": true
             }
     },
@@ -111,7 +111,7 @@
             "description": "Irresistível e viciante! Nosso cookie Ninho com Nutella é a pedida perfeita para os amantes de doces. A massa de chocolate irresistível, o recheio cremoso de leite Ninho e a deliciosa Nutella formam uma combinação única que vai te fazer querer mais e mais. Cuidado, pois essa delícia é viciante!",
             "price": "13.50",
             "old_price": null,
-            "image": "static/img/menu/ninhoNutella-200.jpg",
+            "image": "img/menu/ninhoNutella-200.jpg",
             "is_available": true
             }
     },
@@ -124,7 +124,7 @@
             "description": "Nutella pura. Nosso cookie é uma explosão de sabor para os amantes do maior creme de avelã do mundo. Massa crocante por fora, macia por dentro e recheada com Nutella de verdade, sem mistérios! Cuidado para não se lambuzar tanto na primeira mordida!",
             "price": "13.95",
             "old_price": null,
-            "image": "static/img/menu/nutella-200.jpg",
+            "image": "img/menu/nutella-200.jpg",
             "is_available": true
             }
     },
@@ -137,7 +137,7 @@
             "description": "Duas unidades do nosso cookie que quebra recorde de vendas a cada semana! Na dúvida do que pedir, vai no que todo mundo gosta (e gastando menos)!",
             "price": "21.60",
             "old_price": "27.00",
-            "image": "static/img/menu/redEmDobro-200.jpg",
+            "image": "img/menu/redEmDobro-200.jpg",
             "is_available": true
             }
     },
@@ -150,7 +150,7 @@
             "description": "Dizem que clichês são clichês porque funcionam! Aprecie cada mordida do nosso clichê preferido com essa dupla de oferta do nosso Cookie Ninho com Nutella!",
             "price": "21.60",
             "old_price": "27.00",
-            "image": "static/img/menu/ninhoNutellaEmDobro-200.jpg",
+            "image": "img/menu/ninhoNutellaEmDobro-200.jpg",
             "is_available": true
             }
     },
@@ -163,7 +163,7 @@
             "description": "Escolha o seu preferido! Os nossos três cookies sem recheio fazem muito sucesso e são difíceis de superar! Nessa trinca, você pode escolher o que preferir, seja 1 de cada sabor, seja outra combinação que achar melhor",
             "price": "28.08",
             "old_price": "35.10",
-            "image": "static/img/menu/trincaSemRecheio-300.jpg",
+            "image": "img/menu/trincaSemRecheio-300.jpg",
             "is_available": true
             }
     },
@@ -176,7 +176,7 @@
             "description": "Os campeões estão juntos em um combo imperdível! Desfrute da combinação irresistível dos nossos 3 cookies mais pedidos de 2024: o clássico e amado Tradicional New York, o viciante Ninho com Nutella e o intenso Chocolatudo. Um trio de sabores premiados para você viver a experiência dos favoritos do ano",
             "price": "29.52",
             "old_price": "36.90",
-            "image": "static/img/menu/comboDeOuro-200.JPG",
+            "image": "img/menu/comboDeOuro-200.JPG",
             "is_available": true
             }
     },
@@ -189,7 +189,7 @@
             "description": "Descubra os sabores mais amados em um único combo! Nosso Combo Três Passos reúne os nossos cookies mais irresistíveis em um único lugar. O Red Velvet, o Ninho com Nutella e o Brigadeiro te proporcionam uma experiência única e deliciosa. Prepare-se para uma explosão de sabor em cada mordida e descubra por que cada cookie é como se fosse um passo em direção ao paraíso.",
             "price": "29.52",
             "old_price": "36.90",
-            "image": "static/img/menu/comboTresPassos-200.jpg",
+            "image": "img/menu/comboTresPassos-200.jpg",
             "is_available": true
             }
     },
@@ -202,7 +202,7 @@
             "description": "Escolha os três unidades de sabores que você preferir e pague apenas por dois.",
             "price": "33.48",
             "old_price": "41.85",
-            "image": "static/img/menu/trincaChewiezito-200.jpg",
+            "image": "img/menu/trincaChewiezito-200.jpg",
             "is_available": true
             }
     },
@@ -215,7 +215,7 @@
             "description": "para compartilhar com amigos, família ou até pra cair dentro você mesmo! basta escolher os sabores e o último fica por nossa conta.",
             "price": "70.20",
             "old_price": "81.90",
-            "image": "static/img/menu/leve7Pague6-200.jpg",
+            "image": "img/menu/leve7Pague6-200.jpg",
             "is_available": true
             }
     },
@@ -228,7 +228,7 @@
             "description": "Prepare-se para se apaixonar! Nosso Chocolatudo é mais do que um cookie, é uma experiência única. A massa macia e úmida, repleta de pedaços de chocolate de vários tipos, derrete na boca e te leva para o paraíso do chocolate. Ideal para os momentos em que você precisa de um abraço saboroso.",
             "price": "11.70",
             "old_price": null,
-            "image": "static/img/menu/chocolatudo-200.jpg",
+            "image": "img/menu/chocolatudo-200.jpg",
             "is_available": true
             }
     },
@@ -241,7 +241,7 @@
             "description": "Descubra o segredo do nosso cookie mais amado! Nosso Cookie Tradicional New York é a porta de entrada para um mundo de sabores. Com uma massa irresistível e pedaços generosos de chocolate e nozes, ele é a pedida perfeita para os amantes de cookies que buscam uma experiência autêntica e deliciosa.",
             "price": "11.70",
             "old_price": null,
-            "image": "static/img/menu/newYork-200.jpg",
+            "image": "img/menu/newYork-200.jpg",
             "is_available": true
             }
     },
@@ -254,7 +254,7 @@
             "description": "Prepare-se para se apaixonar! Nosso Cookie Tradicional Red é mais do que um cookie, é uma experiência inesquecível. A massa macia e úmida, com aquele toque de vermelho icônico, e os pedaços de chocolate branco derretido na boca te levarão para o paraíso dos sabores.",
             "price": "11.70",
             "old_price": null,
-            "image": "static/img/menu/redTradicional-200.jpg",
+            "image": "img/menu/redTradicional-200.jpg",
             "is_available": true
             }
     },
@@ -267,7 +267,7 @@
             "description": "Brookie = Brownie + Cookie. Por baixo, um brownie bem molhadinho e chocolatudo. Por cima, nossa massa de cookie com gotas de chocolate, assada no ponto. Duas camadas, zero enrolação. Apenas puro prazer em cada mordida.",
             "price": "18.00",
             "old_price": null,
-            "image": "static/img/menu/IMG_2539.JPG",
+            "image": "img/menu/IMG_2539.JPG",
             "is_available": true
         }
     },
@@ -280,7 +280,7 @@
             "description": "A sua dose diária de felicidade, agora em tamanho família! Nossa Marmita de Cookie Brigadeiro é a opção ideal para satisfazer seus desejos por doces. Um cookie gigante, macio por dentro e crocante por fora, recehado com um brigadeiro irresistível. Perfeito para levar para onde quiser e compartilhar com quem você ama",
             "price": "16.20",
             "old_price": null,
-            "image": "static/img/menu/marmitaBrigadeiro-200.jpg",
+            "image": "img/menu/marmitaBrigadeiro-200.jpg",
             "is_available": true
             }
     },
@@ -293,7 +293,7 @@
             "description": "A tradição reinventada! Nossa Marmita de Cookie Red Velvet é uma releitura do nosso cookie mais vendido, com um toque a mais de cream cheese e chocolate branco. Uma combinação perfeita entre o clássico e o moderno, que vai conquistar o seu paladar.",
             "price": "20.70",
             "old_price": null,
-            "image": "static/img/menu/marmita-red-velvet.jpg",
+            "image": "img/menu/marmita-red-velvet.jpg",
             "is_available": true
             }
     },
@@ -306,7 +306,7 @@
             "description": "A dupla perfeita, agora em um novo formato! Nossa Marmita de Cookie Ninho com Nutella é a combinação perfeita entre o leite Ninho e a Nutella, agora em um formato ainda mais prático e delicioso. A massa de chocolate macia e crocante completa essa combinação irresistível.",
             "price": "20.70",
             "old_price": null,
-            "image": "static/img/menu/marmita-ninho-nutella300.jpg",
+            "image": "img/menu/marmita-ninho-nutella300.jpg",
             "is_available": true
             }
     },
@@ -319,7 +319,7 @@
             "description": "Uma explosão de sabor para os apaixonados pelo creme de avelã mais autêntico do mundo! Camadas generosas da nossa exclusiva massa de cookie caseira, recheada com Nutella cremosa, finalizada com gotas de chocolate crocantes. Perfeita para dividir (ou não...)",
             "price": "22.50",
             "old_price": null,
-            "image": "static/img/menu/marmita-nutella.jpg",
+            "image": "img/menu/marmita-nutella.jpg",
             "is_available": true
             }
     },
@@ -332,7 +332,7 @@
             "description": "Os amantes de chocolate vão se apaixonar! Essa porção traz 10 mini cookies feitos com nossa massa de chocolate intensa e pedaços que derretem na boca. Pequenos no tamanho, gigantes no sabor!",
             "price": "13.95",
             "old_price": null,
-            "image": "static/img/menu/chewiezitoChocolate-200.jpg",
+            "image": "img/menu/chewiezitoChocolate-200.jpg",
             "is_available": true
             }
     },
@@ -345,7 +345,7 @@
             "description": "O clássico ficou ainda melhor! Agora você pode aproveitar uma porção exclusiva dos nossos mini cookies de baunilha, feitos com nossa massa especial, crocante por fora e macia por dentro. Uma explosão de sabor em cada mordida!",
             "price": "13.95",
             "old_price": null,
-            "image": "static/img/menu/chewiezitosBaunilha-200.jpg",
+            "image": "img/menu/chewiezitosBaunilha-200.jpg",
             "is_available": true
             }
     },
@@ -358,7 +358,7 @@
             "description": "O charme do red velvet agora em versão mini! Uma porção com 10 unidades dessa delícia de sabor suave e levemente amanteigado, com aquele toque aveludado irresistível. Perfeito para quem ama um cookie sofisticado e cheio de personalidade!",
             "price": "13.95",
             "old_price": null,
-            "image": "static/img/menu/chewiezitosRed-200.jpg",
+            "image": "img/menu/chewiezitosRed-200.jpg",
             "is_available": true
             }
     },
@@ -371,7 +371,7 @@
             "description": "Uma explosão de sabores! Camadas irresistíveis de mousse de leite Ninho, pedaços dos nossos cookies caseiros e exclusivos, base de brigadeiro cremoso, mousse de chocolate e granulados crocantes para finalizar. A opção perfeita para dias mais quentes",
             "price": "20.00",
             "old_price": null,
-            "image": "static/img/menu/copoGelado-200.jpg",
+            "image": "img/menu/copoGelado-200.jpg",
             "is_available": true
             }
     },

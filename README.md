@@ -4,6 +4,16 @@ A backend system built with Django and Django REST Framework to manage a real-wo
 
 This API was designed to replace third-party delivery platforms, reducing operational costs by approximately R$30,000/year and giving full control over orders, products, and business logic.
 
+## Documentation
+
+Detailed development logs documenting decisions, challenges, and trade-offs organized by the roadmap stages (initially in Brazilian Portuguese): [`/docs/devlogs/`](https://github.com/luccatrevisan/digital_menu/tree/main/docs/devlogs)
+
+## Live Demo
+
+The project is available online and can be explored without having to clone the repository:
+
+https://digitalmenu-production-07dc.up.railway.app/
+
 ## Use Case
 
 This system is actively used to support a real business workflow, processing weekly orders and serving as the backend foundation for a live digital menu.
@@ -27,10 +37,11 @@ I'm also tracking tasks on a Notion Kanban board, where you can see my live work
 ## Tech Stack
 
 - Python 3.13  
-- Django / Django REST Framework  
-- PostgreSQL  
+- Django / Django REST Framework (DRF)
+- PostgreSQL 
+- JWT Authentication
 - Swagger / OpenAPI  
-- Git  
+- Railway
 
 Integrated with a simple frontend (HTML, CSS, JavaScript) for real-world usage.
 
@@ -76,13 +87,9 @@ python manage.py runserver
 - **SQLite → PostgreSQL migration via fixtures:** Used dumpdata to export data to a JSON backup file, manually fixed encoding issues caused by accented characters, then restored with loaddata. Chosen over a direct database dump for simplicity and portability across environments.
 - **Custom IsAdminOrReadOnly permission:** Instead of using built-in AllowAny and IsAdminUser per view, created a reusable permission class that varies access based on the HTTP method. GET requests are public, write operations require staff status. Avoids repetition across all viewsets.
 
-## Documentation
-
-Detailed development logs documenting decisions, challenges, and trade-offs (mostly in Brazilian Portuguese): `/docs/devlogs/`
-
 ## ✉️ Contact
 
-Lucca - [LinkedIn](https://www.linkedin.com/in/lucca-trevisan-86a181378/) | luccatrevisandev@gmail.com
+Lucca - [LinkedIn](https://www.linkedin.com/in/luccatrevisan/) | luccatrevisandev@gmail.com
 
 ---
 **MIT License • Built with a focus on real-world problem solving, backend architecture, and practical system design.**
