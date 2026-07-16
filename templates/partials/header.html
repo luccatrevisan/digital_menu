@@ -3,12 +3,36 @@
 <header>
     <img src="{% static 'img/logo-sem-fundo100-removebg-preview.png' %}" style="width: 100px;" alt="Chewie Cookies">
 
-    <nav>
-        <!-- 
-        can evolve to check if the user is logged in (Hello, {name} | My account (My orders etc)) 
-        -->
-        <a href="{% url 'index' %}">Inicio</a>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'register' %}">Cadastro</a> 
+    <nav id="navbar">
+        <a href="{% url 'index' %}">Início</a>
+
+        <span id="guest-nav">
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Cadastro</a>
+        </span>
+
+        <span id="user-nav" hidden>
+            <span id="welcome-user"></span>
+            <a href="#">Minha conta</a>
+            <a href="" id="logout-btn">Sair</a>
+        </span>
     </nav>
 </header>
+
+<script>
+    const accessToken = localStorage.getItem("access");
+
+    if (accessToken) {
+        document.getElementById("guest-nav").hidden = true;
+        document.getElementById("user-nav").hidden = false;
+    }
+    
+    const logoutButton = document.getElementById("logout-btn");
+
+    logoutButton.addEventListener("click", async function () {
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+
+        window.location.reload()
+    })
+</script>

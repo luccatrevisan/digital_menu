@@ -92,11 +92,11 @@ class Order(models.Model):
         if not self.items.exists():
             raise ValidationError("Cannot confirm an order without items.")
         
-        if (self.delivery_type == self.DeliveryType.DELIVERY and self.address is None):
-            raise ValidationError("Delivery orders require an address.")
-        
         if self.total_price < 30:
             raise ValidationError("The total price should be R$30,00 or more.")
+        
+        if (self.delivery_type == self.DeliveryType.DELIVERY and self.address is None):
+            raise ValidationError("Delivery orders require an address.")
         
         if self.delivery_type == self.DeliveryType.DELIVERY:
             self.populate_delivery_fields()

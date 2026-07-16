@@ -141,24 +141,49 @@ function buildOrderPayload() {
 
 const checkoutButton = document.getElementById("checkout-btn");
 
-checkoutButton.addEventListener("click", async function() {
+async function checkout(){
     const payload = buildOrderPayload();
     const accessToken = localStorage.getItem("access");
 
     if (!accessToken) {
         document.getElementById("login-warning").hidden = false;
         return;
-}
+    }
 
-    const response = await fetch("/api/orders/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization" : `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(payload)
-    })
-});
+    try{
+        const response = await fetch("/api/orders/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization" : `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+
+            const message = Object.values(error).flat().join("\n");
+            alert(message);
+
+            if (error.detail === "The total price should be R$30,00 or more.") {
+                document.getElementById("minimum-order-warning").hidden = false;
+            }
+        }
+
+        const data = await response.json();
+        cleanCart();
+
+        window.location.href = `orders/success/?order=${data.order_id}`;
+    
+    } catch(error) {
+        console.error(error);
+        alert("Erro ao conectar com o servidor.");
+    }
+};
+
+checkoutButton.addEventListener("click", checkout);
+    
 
 
 function openCart() {

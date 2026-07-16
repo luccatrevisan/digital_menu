@@ -1,12 +1,11 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render 
 from rest_framework import generics, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.orders.serializers import OrderCreateSerializer
-from apps.orders.models import Order, OrderItem
-from apps.menu.models import MenuItem
-from django.db import transaction
+from apps.orders.services.create_order import create_order
+from django.core.exceptions import ValidationError
 
 
 class OrdersView(generics.CreateAPIView):
@@ -16,21 +15,23 @@ class OrdersView(generics.CreateAPIView):
 
     
     def post(self, request):
-        with transaction.atomic():
-            serializer = self.get_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-            order = Order.objects.create(
-                user = request.user
+        try:
+            order = create_order(
+                user = request.user,
+                items_data = serializer.validated_data["items"]
+            )
+        
+        except ValidationError as e:
+            return Response(
+                {"detail" : e.message},
+                status=status.HTTP_400_BAD_REQUEST
             )
 
-            for item_data in serializer.validated_data["items"]:
-                menu_item = MenuItem.objects.get(pk=item_data["menu_item_id"])
+        return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)
+        
 
-                OrderItem.objects.create(
-                    order=order,
-                    menu_item=menu_item,
-                    quantity=item_data["quantity"]
-                )
-
-            return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)
+def order_success(request):
+    return render(request, "orders/order_success.html")

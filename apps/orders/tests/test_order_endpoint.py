@@ -18,7 +18,7 @@ def authenticated_client(user):
 
 
 @pytest.mark.django_db
-def test_create_order_success(authenticated_client, menu_item):
+def test_create_order_success(authenticated_client, user, menu_item):
     payload = {
         "items": [
             {
@@ -34,6 +34,9 @@ def test_create_order_success(authenticated_client, menu_item):
         format="json"
     )
 
+    order = Order.objects.first()
+    
+    assert order.user == user
     assert response.status_code == 201
     assert Order.objects.count() == 1
     assert OrderItem.objects.count() == 1
@@ -162,3 +165,28 @@ def test_create_order_with_multiple_items(authenticated_client, menu_item, categ
 
     order_items = order.items.all()
     assert {item.quantity for item in order_items} == {2, 3}
+
+
+@pytest.mark.django_db
+def test_create_order_with_invalid_token(menu_item):
+    client = APIClient()
+    client.credentials(
+        HTTP_AUTHORIZATION="Bearer invalid_token"
+    )
+
+    payload = {
+        "items": [
+            {
+                "menu_item_id": menu_item.id,
+                "quantity": 1
+            }
+        ]
+    }
+
+    response = client.post(
+        "/api/orders/",
+        payload,
+        format="json"
+    )
+
+    assert response.status_code == 401
