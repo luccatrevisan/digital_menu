@@ -13,7 +13,7 @@ class OrdersView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = OrderCreateSerializer
 
-    
+
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

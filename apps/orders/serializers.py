@@ -11,6 +11,9 @@ class OrderCreateSerializer(serializers.Serializer):
     items = OrderItemInputSerializer(many=True)
     
     def validate_items(self, items):
+        if not items:
+            raise serializers.ValidationError("The cart cannot be empty.")
+
         for item in items:
             try:
                 menu_item = MenuItem.objects.get(pk=item["menu_item_id"])
@@ -29,8 +32,5 @@ class OrderCreateSerializer(serializers.Serializer):
             
             except Stock.DoesNotExist:
                 pass
-
-        if not items:
-            raise serializers.ValidationError("O carrinho não pode ficar vazio.")
 
         return items

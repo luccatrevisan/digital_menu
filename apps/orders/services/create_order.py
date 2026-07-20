@@ -3,8 +3,22 @@ from django.core.exceptions import ValidationError
 from apps.orders.models import Order, OrderItem
 from apps.menu.models import MenuItem, Stock
 
+'''
+    payload = {
+        "items": [
+            {
+                "menu_item_id": 3,
+                "quantity": 2
+            },
+            {
+                "menu_item_id" : 4,
+                "quantity" : 1
+            }
+        ]
+    }
+'''
 
-def create_order(user, items_data): 
+def create_order(user, items_data):
     with transaction.atomic():
         order = Order.objects.create(
             user = user
@@ -14,37 +28,13 @@ def create_order(user, items_data):
             menu_item_id = item.get("menu_item_id")
             quantity = item.get("quantity")
 
-            # validate menu item existence
-            try:
-                menu_item = MenuItem.objects.get(id=menu_item_id)
-
-            except MenuItem.DoesNotExist:
-                raise ValidationError(
-                    f"Menu item with id {menu_item_id} does not exist."
-                )
-            
-            if menu_item.is_available is False:
-                raise ValidationError("This product is not available")
-            
-            
-
-            # validate stock quantity
-            try:
-                stock = Stock.objects.select_for_update().get(menu_item=menu_item)
-
-                if stock.quantity is not None and quantity > stock.quantity:
-                    raise ValidationError(
-                        f"Insufficient stock for '{menu_item.name}'. "
-                        f"Available: {stock.quantity}"
-                    )
-            
-                # decreases stock
-                if stock.quantity is not None:
-                    stock.quantity -= quantity
-                    stock.save(update_fields=["quantity"])
-
-            except Stock.DoesNotExist:
-                pass
+            menu_item = MenuItem.objects.get(pk=menu_item_id)
+            stock = Stock.objects.select_for_update().get(menu_item=menu_item)
+        
+            # decreases stock
+            if stock.quantity is not None:
+                stock.quantity -= quantity
+                stock.save(update_fields=["quantity"])
 
             
             # create order item
@@ -56,6 +46,7 @@ def create_order(user, items_data):
 
         # update total order price
         order.update_total_price()
-        order.confirm_order()
+        order.validate_minimum_price()
+
 
         return order
