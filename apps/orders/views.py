@@ -24,11 +24,8 @@ class OrdersView(generics.CreateAPIView):
                 items_data = serializer.validated_data["items"]
             )
         
-        except ValidationError as e:
-            return Response(
-                {"detail" : e.message},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        except ValidationError as error:
+            return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)
         

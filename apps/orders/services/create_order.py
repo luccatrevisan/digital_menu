@@ -1,5 +1,4 @@
 from django.db import transaction
-from django.core.exceptions import ValidationError
 from apps.orders.models import Order, OrderItem
 from apps.menu.models import MenuItem, Stock
 
@@ -29,24 +28,25 @@ def create_order(user, items_data):
             quantity = item.get("quantity")
 
             menu_item = MenuItem.objects.get(pk=menu_item_id)
-            stock = Stock.objects.select_for_update().get(menu_item=menu_item)
-        
-            # decreases stock
-            if stock.quantity is not None:
-                stock.quantity -= quantity
-                stock.save(update_fields=["quantity"])
 
+            try:
+                stock = Stock.objects.select_for_update().get(menu_item=menu_item)
+                
+                if stock.quantity is not None:
+                    stock.quantity -= quantity
+                    stock.save(update_fields=["quantity"])
+
+            except Stock.DoesNotExist:
+                pass
             
-            # create order item
             OrderItem.objects.create(
                 order=order,
                 menu_item=menu_item,
                 quantity=quantity
             )
 
-        # update total order price
+        
         order.update_total_price()
         order.validate_minimum_price()
-
 
         return order
