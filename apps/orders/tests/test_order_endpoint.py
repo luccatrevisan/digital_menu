@@ -37,6 +37,7 @@ def test_create_order_success(authenticated_client, user, menu_item):
     order = Order.objects.first()
     
     assert order.user == user
+    assert order.total_price == menu_item.price * 2
     assert response.status_code == 201
     assert Order.objects.count() == 1
     assert OrderItem.objects.count() == 1
@@ -79,6 +80,7 @@ def test_create_order_with_empty_cart(
     )
 
     assert response.status_code == 400
+    assert response.data["items"]["message"] == "The cart cannot be empty."
 
 
 @pytest.mark.django_db
@@ -101,6 +103,7 @@ def test_create_order_with_invalid_menu_item(
     )
 
     assert response.status_code == 400
+    assert "does not exist" in str(response.data)
 
 
 @pytest.mark.django_db
@@ -190,3 +193,24 @@ def test_create_order_with_invalid_token(menu_item):
     )
 
     assert response.status_code == 401
+
+
+@pytest.mark.django_db
+def test_create_order_below_minimum_price(authenticated_client, menu_item):
+    payload = {
+        "items": [
+            {
+                "menu_item_id": menu_item.id,
+                "quantity": 1
+            }
+        ]
+    }
+
+    response = authenticated_client.post(
+        "/api/orders/",
+        payload,
+        format="json"
+    )
+
+    assert response.status_code == 400
+    assert response.data.message == "The total price should be R$30,00 or more."

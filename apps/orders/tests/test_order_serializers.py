@@ -1,10 +1,20 @@
-from apps.orders.models import Order
-from django.core.exceptions import ValidationError
-from apps.orders.serializers import OrderCreateSerializer, OrderItemInputSerializer
+from apps.orders.serializers import OrderCreateSerializer
 import pytest
 
+
+def test_empty_cart():
+    payload = {
+        "items": []
+    }
+
+    serializer = OrderCreateSerializer(data=payload)
+
+    assert not serializer.is_valid()
+    assert "The cart cannot be empty." in str(serializer.errors)
+
+
 @pytest.mark.django_db
-def test_if_menu_item_does_not_exist(menu_item):
+def test_rejects_nonexistent_menu_item(menu_item):
     payload = {
         "items": [
             {
@@ -56,6 +66,7 @@ def test_if_requested_quantity_exceeds_stock(menu_item, stock):
 
 
 def test_allow_item_without_stock(menu_item):
+    # Items without a Stock object are considered to have unlimited stock.
     payload = {
         "items": [
             {
