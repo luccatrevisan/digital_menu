@@ -24,7 +24,7 @@ The business context directly influenced the system design, including pricing ac
 Core functionality is already implemented and in use, with ongoing improvements focused on scalability and production readiness.
 Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
 
-![ROADMAP](docs/img/roadmap-progress.png)
+![ROADMAP](docs/img/updated-roadmap.png)
 
 I'm also tracking tasks on a Notion Kanban board, where you can see my live workflow.
 [👉 View Project Board on Notion](https://www.notion.so/digital_menu-2f77457680e780f5a107d98ab68e2dd1?source=copy_link)
