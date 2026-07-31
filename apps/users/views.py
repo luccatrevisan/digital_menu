@@ -30,4 +30,4 @@ class AddressView(generics.ListCreateAPIView):
         return Address.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user) # para evitar que um outro usuário salve um endereço que não é dele. essa função faz com que o endereço cadastrado seja sempre do usuário cadastrando ele.
+        serializer.save(user=self.request.user)
