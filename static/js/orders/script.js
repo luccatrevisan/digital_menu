@@ -12,7 +12,7 @@ function saveCart(){
     );
 }
 
-function addToCart(id, name, price){
+function addToCart(id, name, price, image){
     const existingItem = cart.find(item => item.id === id);
     
     if (existingItem) {
@@ -22,6 +22,7 @@ function addToCart(id, name, price){
             id,
             name,
             price,
+            image,
             quantity: 1
         });
     }
@@ -192,9 +193,7 @@ async function checkout(){
 
         const data = await response.json();
         document.getElementById("order-warning").hidden = true;
-        cleanCart();
-
-        window.location.href = `/orders/success/?order=${data.order_id}`;
+        window.location.href = `/orders/checkout/?order=${data.order_id}`;
     
     } catch(error) {
         console.error(error);

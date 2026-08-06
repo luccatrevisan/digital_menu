@@ -28,7 +28,11 @@ class OrdersView(generics.CreateAPIView):
             return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)
-        
+
+
+def checkout(request):
+    return render(request, "orders/checkout.html")
+
 
 def order_success(request):
     return render(request, "orders/order_success.html")
