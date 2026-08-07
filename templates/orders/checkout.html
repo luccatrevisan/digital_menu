@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,182 +11,134 @@
 
 <body>
 
-<main class="checkout">
+    <main class="checkout">
 
-    <section class="checkout-card">
+        <section class="checkout-card">
 
-        <h1>Checkout</h1>
+            <h1>Checkout</h1>
 
-        <p>
-            Confira seu pedido antes de confirmar.
-        </p>
-
-        <hr>
-
-        <!-- ========================= -->
-        <!-- ORDER SUMMARY             -->
-        <!-- ========================= -->
-
-        <section>
-
-            <h2>Resumo do pedido</h2>
-
-            <div id="order-summary"></div>
-
-            <div class="order-total">
-                <span>Total</span>
-                <strong id="cart-total">R$ 0,00</strong>
-            </div>
-
-        </section>
-
-        <hr>
-
-        <!-- ========================= -->
-        <!-- DELIVERY ADDRESS          -->
-        <!-- ========================= -->
-
-        <section>
-
-            <h2>Endereço de entrega</h2>
-
-            <!-- lista de endereços -->
-            <div id="address-list">
-
-                <!-- será preenchido via JavaScript com loadAddresses() -->
-
-            </div>
-
-            <button
-                id="new-address-button"
-                type="button">
-                Adicionar novo endereço
-            </button>
-
-            <!-- formulário escondido -->
-            <form id="address-form" hidden>
-
-                <label>
-                    CEP
-                    <input type="text" id="cep">
-                </label>
-
-                <label>
-                    Rua
-                    <input type="text" id="street">
-                </label>
-
-                <label>
-                    Número
-                    <input type="text" id="number">
-                </label>
-
-                <label>
-                    Complemento
-                    <input type="text" id="complement">
-                </label>
-
-                <label>
-                    Bairro
-                    <input type="text" id="neighborhood">
-                </label>
-
-                <label>
-                    Cidade
-                    <input type="text" id="city">
-                </label>
-
-                <label>
-                    Estado
-                    <input type="text" id="state">
-                </label>
-
-                <button type="submit">
-                    Salvar endereço
-                </button>
-
-            </form>
-
-        </section>
-
-        <hr>
-
-        <!-- ========================= -->
-        <!-- ACTIONS                   -->
-        <!-- ========================= -->
-
-        <section class="checkout-actions">
-
-            <a
-                href="/"
-                class="secondary-button">
-                Voltar ao cardápio
-            </a>
-
-            <button id="confirm-order">
-                Confirmar pedido
-            </button>
-
-        </section>
-
-    </section>
-
-</main>
-
-<script>
-
-const STORAGE_KEY = "chewie_cart";
-
-function renderOrderSummary() {
-    console.log("renderOrderSummary");
-    const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    console.log(cart);
-
-    const orderSummary = document.getElementById("order-summary");
-    const cartTotal = document.getElementById("cart-total");
-
-    orderSummary.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach(item => {
-
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-
-        orderSummary.innerHTML += `
-            <div class="order-item">
-
-                <strong>${item.name}</strong>
-
-                <p>
-                    ${item.quantity} × R$ ${item.price.toFixed(2)}
-                </p>
-
-                <p>
-                    Subtotal:
-                    <strong>R$ ${subtotal.toFixed(2)}</strong>
-                </p>
-
-            </div>
+            <p>
+                Confira seu pedido antes de confirmar.
+            </p>
 
             <hr>
-        `;
-    });
 
-    cartTotal.textContent = `R$ ${total.toFixed(2)}`;
-}
+            <!-- ========================= -->
+            <!-- ORDER SUMMARY             -->
+            <!-- ========================= -->
 
-document.addEventListener("DOMContentLoaded", () => {
+            <section>
 
-    renderOrderSummary();
+                <h2>Resumo do pedido</h2>
 
-    // next task:
-    // loadAddresses();
+                <div id="order-summary"></div>
 
-});
+                <div class="order-total">
+                    <span>Total</span>
+                    <strong id="cart-total">R$ 0,00</strong>
+                </div>
 
-</script>
+            </section>
 
+            <hr>
+
+            <!-- ========================= -->
+            <!-- DELIVERY ADDRESS          -->
+            <!-- ========================= -->
+
+            <section>
+
+                <h2>Endereço de entrega</h2>
+
+                <div id="address-list">
+
+                </div>
+
+                <button
+                    id="new-address-button"
+                    type="button">
+                    Adicionar novo endereço
+                </button>
+
+                <form id="address-form" hidden>
+
+                    <label>
+                        CEP
+                        <input type="text" id="cep">
+                    </label>
+
+                    <label>
+                        Rua
+                        <input type="text" id="street">
+                    </label>
+
+                    <label>
+                        Número
+                        <input type="text" id="number">
+                    </label>
+
+                    <label>
+                        Complemento
+                        <input type="text" id="complement">
+                    </label>
+
+                    <label>
+                        Bairro
+                        <input type="text" id="neighborhood">
+                    </label>
+
+                    <label>
+                        Cidade
+                        <input type="text" id="city">
+                    </label>
+
+                    <label>
+                        Estado
+                        <input type="text" id="state">
+                    </label>
+
+                    <label>
+                        Tipo
+                        <select id="label">
+                            <option value="CASA">Casa</option>
+                            <option value="TRABALHO">Trabalho</option>
+                        </select>
+                    </label>
+
+                    <button type="submit">
+                        Salvar endereço
+                    </button>
+
+                </form>
+
+            </section>
+
+            <hr>
+
+            <!-- ========================= -->
+            <!-- ACTIONS                   -->
+            <!-- ========================= -->
+
+            <section class="checkout-actions">
+
+                <a
+                    href="/"
+                    class="secondary-button">
+                    Voltar ao cardápio
+                </a>
+
+                <button id="confirm-order">
+                    Confirmar pedido
+                </button>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="{% static 'js/orders/cart.js' %}"></script>
+    <script src="{% static 'js/orders/apiCalls.js' %}"></script>
+    <script src="{% static 'js/orders/script.js' %}"></script>
 </body>
 </html>

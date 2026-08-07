@@ -1,67 +1,5 @@
-const URL = "/api/orders"
-const STORAGE_KEY = "chewie_cart";
+const URL = "/api/orders";
 
-let cart = JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-) || [];
-
-function saveCart(){
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(cart)
-    );
-}
-
-function addToCart(id, name, price, image){
-    const existingItem = cart.find(item => item.id === id);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            id,
-            name,
-            price,
-            image,
-            quantity: 1
-        });
-    }
-    
-    saveCart()
-    updateCart();
-    showFeedback(id);
-}
-
-function removeFromCart(id){
-    cart = cart.filter(item => item.id !== id);
-
-    saveCart()
-    updateCart();
-}
-
-function changeQuantity(id, newQuantity){
-    const item = cart.find(item => item.id === id);
-    
-    if (!item) {
-        return;
-    }
-
-    if (newQuantity <= 0) {
-        removeFromCart(id);
-        return;
-    }
-
-    item.quantity = newQuantity;
-
-    saveCart();
-    updateCart();
-}
-
-function cleanCart(){
-    cart = [];
-    localStorage.removeItem(STORAGE_KEY);
-    updateCart();
-}
 
 function updateCart() {
     const cartBadge = document.getElementById('cartBadge');
@@ -130,77 +68,124 @@ function showFeedback(id) {
     }, 1000);
 }
 
-function buildOrderPayload() {
-    return {
-        items: cart.map(item => ({
-            menu_item_id: item.id,
-            quantity: item.quantity
-        }))
-    };
+
+const checkoutButton = document.getElementById("checkout-btn");
+
+if (checkoutButton) {
+    checkoutButton.addEventListener("click", checkout);
+}
+
+function renderOrderSummary() {
+    console.log("renderOrderSummary");
+    const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    console.log(cart);
+
+    const orderSummary = document.getElementById("order-summary");
+    const cartTotal = document.getElementById("cart-total");
+
+    orderSummary.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        orderSummary.innerHTML += `
+            <div class="order-item">
+
+                <strong>${item.name}</strong>
+
+                <p>
+                    ${item.quantity} × R$ ${item.price.toFixed(2)}
+                </p>
+
+                <p>
+                    Subtotal:
+                    <strong>R$ ${subtotal.toFixed(2)}</strong>
+                </p>
+
+            </div>
+
+            <hr>
+        `;
+    });
+
+    cartTotal.textContent = `R$ ${total.toFixed(2)}`;
 }
 
 
-const checkoutButton = document.getElementById("checkout-btn");
-checkoutButton.addEventListener("click", checkout);
 
-async function checkout(){
-    const payload = buildOrderPayload();
-    const accessToken = localStorage.getItem("access");
+function renderAdresses(addresses) {
+    const addressList = document.getElementById("address-list");
+    addressList.innerHTML = "";
 
-    try{
-        const response = await fetch("/api/orders/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization" : `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.status === 401) {
-            localStorage.removeItem("access");
-            localStorage.removeItem("refresh");
-
-            window.location.href = "/login/";
-            return;
-        }
-
-        if (!response.ok) {
-            const error = await response.json();
-            const orderWarning = document.getElementById("order-warning");
-            orderWarning.hidden = false;
-
-            if (error[0] === "The total price should be R$30,00 or more.") {
-                orderWarning.textContent = "O pedido precisa ultrapassar o limite de R$30,00.";
-                return;
-            }
-            
-            if (error.items.code === "empty_cart") {
-                orderWarning.textContent = "O carrinho não pode ser concluído sem itens.";
-            }
-            else if (error.items.code === "item_unavailable") {
-                orderWarning.textContent = `O item ${error.items.menu_item} não está disponível no momento.`;
-            }
-            else if (error.items.code === "item_does_not_exist") {
-                orderWarning.textContent = "Esse item não existe.";
-            }
-            else if (error.items.code === "stock_unavailable") {
-                orderWarning.textContent = `O item ${error.items.menu_item} não tem estoque o suficiente. Disponíveis: ${error.items.remaining}`;
-            }
+    if (!addresses || addresses.length === 0) { 
+        addressList.innerHTML = `<p>Você ainda não possui endereços cadastrados.</p>`;
         
-            return;
-        }
-
-        const data = await response.json();
-        document.getElementById("order-warning").hidden = true;
-        window.location.href = `/orders/checkout/?order=${data.order_id}`;
-    
-    } catch(error) {
-        console.error(error);
-        alert("Erro ao conectar com o servidor.");
+        document.getElementById("address-form").hidden = false;
+        return;
     }
-};    
 
+    addresses.forEach(address => {
+        addressList.innerHTML += `
+            <label class="address-card">
+
+                <input
+                    type="radio"
+                    name="selected-address"
+                    value="${address.id}"
+                    ${addresses.indexOf(address) === 0 ? "checked" : ""}
+                >
+
+                <strong>${address.label}</strong><br>
+
+                ${address.street}, ${address.number}<br>
+
+                ${address.neighborhood} - ${address.city}/${address.state}<br>
+
+                CEP: ${address.cep}
+
+            </label>
+
+            <hr>
+
+        `;
+    });
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+    renderOrderSummary();
+    
+    const addresses = await loadAddresses();
+    renderAdresses(addresses);
+
+});
+
+
+const addressForm = document.getElementById("address-form");
+const newAddressButton = document.getElementById("new-address-button");
+
+if (newAddressButton && addressForm) {
+    newAddressButton.addEventListener("click", () => {
+        addressForm.hidden = false;
+    });
+}
+
+if (addressForm) {
+    addressForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        await createAddress();
+
+        const addresses = await loadAddresses();
+        renderAdresses(addresses);
+
+        addressForm.reset();
+        addressForm.hidden = true;
+    });
+}
 
 function openCart() {
     document.getElementById('modalCarrinho').style.display = 'block';
@@ -209,6 +194,13 @@ function openCart() {
 function closeCart() {
     document.getElementById('modalCarrinho').style.display = 'none';
 }
+
+window.updateCart = updateCart;
+window.showFeedback = showFeedback;
+window.openCart = openCart;
+window.closeCart = closeCart;
+window.renderOrderSummary = renderOrderSummary;
+window.renderAdresses = renderAdresses;
 
 window.onclick = function(event) {
     const modal = document.getElementById('modalCarrinho');
