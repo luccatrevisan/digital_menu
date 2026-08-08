@@ -10,9 +10,7 @@ Detailed development logs documenting decisions, challenges, and trade-offs orga
 
 ## Live Demo
 
-The project is available online and can be explored without having to clone the repository:
-
-https://digitalmenu-production-07dc.up.railway.app/
+The production deployment is currently offline. Now working on CI/CD, Docker and AWS to replace the Railway project.
 
 ## Use Case
 
@@ -79,13 +77,16 @@ python manage.py runserver
 
 ## Technical Decisions
 
-- **DecimalField for prices:** FloatField has precision errors at scale — even a one-cent discrepancy means incorrect financial data. DecimalField guarantees exact representation for monetary values.
-- **1:N Category→MenuItem:** Simplicity over flexibility. A single category per item covers the current use case. Can refactor to ManyToMany if the business requires it.
-- **JWT over DRF's built-in TokenAuthentication:** JWT validates the token by verifying its signature, without hitting the database on every request. Better for scalability and more appropriate for stateless REST APIs.
-- **SessionAuthentication kept alongside JWT:** Primarily kept for Django Admin compatibility. Not strictly necessary for the API itself, but removing it would break the admin interface authentication flow.
-- **BearerAuth configured on Swagger:** After protecting endpoints with IsAuthenticated, Swagger required authentication to test routes. Configured BearerAuth on drf-spectacular to allow JWT to be sent via the Authorization header directly from the Swagger UI.
-- **SQLite → PostgreSQL migration via fixtures:** Used dumpdata to export data to a JSON backup file, manually fixed encoding issues caused by accented characters, then restored with loaddata. Chosen over a direct database dump for simplicity and portability across environments.
-- **Custom IsAdminOrReadOnly permission:** Instead of using built-in AllowAny and IsAdminUser per view, created a reusable permission class that varies access based on the HTTP method. GET requests are public, write operations require staff status. Avoids repetition across all viewsets.
+- **Service Layer for Order Creation:** Extracted order creation into a dedicated service to keep views focused on HTTP concerns and centralize business logic such as order item creation, total calculation, and stock updates.
+- **Atomic Transactions and Row Locking:** Used `transaction.atomic()` and `select_for_update()` during order creation to prevent partial orders and race conditions when multiple orders attempt to consume the same stock concurrently.
+- **DecimalField for Monetary Values:** Used DecimalField instead of floating-point types to guarantee exact monetary calculations and prevent precision errors in prices and order totals.
+- **SQLite → PostgreSQL Migration:** Migrated the application database from SQLite to PostgreSQL to better reflect the production environment and support a more robust relational database setup.
+- **JWT Authentication:** Chose JWT authentication for the REST API to provide stateless authentication and separate API authentication from Django's session-based admin interface.
+- **Structured API Errors:** Implemented machine-readable error codes alongside human-readable messages, allowing the frontend to handle business errors independently from their displayed text.
+- **MVP-Driven Architecture:** Removed the Order State Machine after identifying that it introduced complexity before the notification system required to use it. Kept the order flow focused on the core requirement: reliably creating and processing orders.
+- **User-Owned Resources:** Designed the Addresses API so authenticated users can only access and manage their own addresses, enforcing ownership at the backend rather than relying on frontend restrictions.
+- **Reusable Permissions:** Created a custom IsAdminOrReadOnly permission to centralize access rules for resources that are publicly readable but restricted for write operations, avoiding duplicated permission logic across views.
+- **API Documentation and Authentication:** Configured Swagger/OpenAPI with Bearer authentication so protected endpoints can be tested directly through the API documentation interface.
 
 ## ✉️ Contact
 
