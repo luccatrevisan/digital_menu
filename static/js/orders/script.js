@@ -76,9 +76,7 @@ if (checkoutButton) {
 }
 
 function renderOrderSummary() {
-    console.log("renderOrderSummary");
     const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    console.log(cart);
 
     const orderSummary = document.getElementById("order-summary");
     const cartTotal = document.getElementById("cart-total");
@@ -136,7 +134,7 @@ function renderAdresses(addresses) {
                     type="radio"
                     name="selected-address"
                     value="${address.id}"
-                    ${addresses.indexOf(address) === 0 ? "checked" : ""}
+                    ${addresses.indexOf(address) === (addresses.length - 1) ? "checked='true'" : "checked='false'"}
                 >
 
                 <strong>${address.label}</strong><br>
