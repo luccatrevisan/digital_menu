@@ -2,7 +2,7 @@
 
 A backend system built with Django and Django REST Framework to manage a real-world cookie business operation.
 
-This API was designed to replace third-party delivery platforms, reducing operational costs by approximately R$30,000/year and giving full control over orders, products, and business logic.
+This API is being built to replace third-party delivery platforms, with a projected reduction in operational costs of approximately R$30,000/year (based on current per-order fees and monthly subscriptions paid to those platforms), while giving full control over orders, products, and business logic. This projection builds on an earlier result: replacing a R$175/month digital-menu tool with a self-built R$7/month alternative, without losing sales.
 
 ## Documentation
 
@@ -14,9 +14,7 @@ The production deployment is currently offline. Now working on CI/CD, Docker and
 
 ## Use Case
 
-This system is actively used to support a real business workflow, processing weekly orders and serving as the backend foundation for a live digital menu.
-
-The business context directly influenced the system design, including pricing accuracy, product combinations, and inventory structure.
+The static frontend (HTML/CSS/JS) that preceded this API is actively used in production, processing real weekly orders for the business. This Django/DRF backend is the next evolution of that system — it is deployed but not yet accepting live orders while the Addresses feature is finalized. Once complete, it will replace the current order flow.
 
 ## Roadmap
 Core functionality is already implemented and in use, with ongoing improvements focused on scalability and production readiness.
