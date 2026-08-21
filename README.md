@@ -17,7 +17,7 @@ The production deployment is currently offline. Now working on CI/CD, Docker and
 The static frontend (HTML/CSS/JS) that preceded this API is actively used in production, processing real weekly orders for the business. This Django/DRF backend is the next evolution of that system — it is deployed but not yet accepting live orders while the Addresses feature is finalized. Once complete, it will replace the current order flow.
 
 ## Roadmap
-Core functionality is already implemented and in use, with ongoing improvements focused on scalability and production readiness.
+Core functionality (products, orders, stock control) is implemented and validated through tests, with the Addresses feature and production deploy in progress before the API goes live for order-taking.
 Below is the high-level roadmap of the project and you can keep up with my progress [here on tldraw](https://www.tldraw.com/f/Y5b2nbWQnTV7kjM88x4iu?d=v-397.-238.2636.1299.page)
 
 ![ROADMAP](docs/img/updated-roadmap.png)
