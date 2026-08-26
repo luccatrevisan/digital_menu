@@ -64,7 +64,15 @@
 
                     <label>
                         CEP
-                        <input type="number" id="cep" placeholder="Preencha apenas números">
+                        <input 
+                            type="text"
+                            id="cep"
+                            placeholder="12345999"
+                            inputmode="numeric"
+                            maxlength="8"
+                            pattern="[0-9]{8}"
+                            required
+                        >
                     </label>
 
                     <label>

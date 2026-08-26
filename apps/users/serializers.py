@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from apps.users.models import CustomUser, Address
 from django.contrib.auth.password_validation import validate_password
+from requests import request
+
+VIA_CEP_URL = "https://viacep.com.br/ws/"
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -27,37 +30,64 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class AddressSerializer(serializers.ModelSerializer):
+    cep = serializers.CharField(
+        required=True, 
+        error_messages={
+            "required" : {
+                "message" : "O CEP é obrigatório.",
+                "code"  : "missing_cep"
+            },
+            "blank" : {
+                "message" : "O CEP não pode estar vazio.",
+                "code"  : "empty_cep"
+            }
+        })
+
     class Meta:
         model = Address
         fields = "__all__"
         read_only_fields = ["user"]
 
-   
-    def validate(self, data):
-        # Reject completely empty address payloads
-        required = ["cep", "street", "number", "neighborhood", "city", "state", "label"]
+    def validate_cep(self, value):
+        '''
+        normalize: accept numbers only and 8 digits (without hifen)        
+        '''
 
-        if not any(data.get(k) for k in required):
+        digits = "".join([c for c in str(value).strip() if c.isdecimal()])
+
+
+        if len(digits) != 8:
             raise serializers.ValidationError(
                 detail={
-                    "message": "Os campos do endereço não podem ficar vazios.",
-                    "code": "empty_address_input",
+                    "message": "CEP inválido. Use apenas 8 dígitos (ex: 12345000).",
+                    "code": "invalid_cep"
                 }
             )
 
-        return data
+
+        cep_response = request.get(VIA_CEP_URL + digits + "/json/")
+        '''
+        When a CEP with a valid format but nonexistent value is queried the response will contain an "erro" value equal to "true". This means the queried CEP was not found in the database.
+
+        {
+            "cep": "01001000",
+            "logradouro": "Praça da Sé", -> equivalent to 'street'
+            "bairro": "Sé", -> equivalent to 'neighbourhood'
+            "localidade": "São Paulo", -> equivalent to 'city'
+            "uf": "SP", -> equivalent to 'state'
+        }
+        '''
+
+        if "erro" in cep_response:
+            raise serializers.ValidationError(
+                detail={
+                    "message" : "Esse CEP não existe. Confira o valor digitado.",
+                    "code" : "inexistent_cep"
+                }
+            )
 
 
-    def validate_cep(self, value):
-        if value is None:
-            raise serializers.ValidationError(detail={"message": "CEP é obrigatório.", "code": "missing_cep"})
-
-        # normalize: accept digits or digits+hyphen, return formatted as 12345-678
-        digits = "".join([c for c in str(value) if c.isdigit()])
-        if len(digits) != 8:
-            raise serializers.ValidationError(detail={"message": "CEP inválido. Use 8 dígitos (ex: 24220000).", "code": "invalid_cep"})
-
-        return f"{digits[:5]}-{digits[5:]}"
+        return digits
 
 
     def validate_street(self, value):
