@@ -1,6 +1,7 @@
 from django.db import transaction
 from apps.orders.models import Order, OrderItem
 from apps.menu.models import MenuItem, Stock
+from apps.orders.exceptions import InsufficientStockError
 
 '''
     payload = {
@@ -33,6 +34,8 @@ def create_order(user, items_data):
                 stock = Stock.objects.select_for_update().get(menu_item=menu_item)
                 
                 if stock.quantity is not None:
+                    if stock.quantity < quantity:
+                        raise InsufficientStockError(menu_item.name, stock.quantity)
                     stock.quantity -= quantity
                     stock.save(update_fields=["quantity"])
 

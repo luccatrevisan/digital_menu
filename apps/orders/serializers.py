@@ -43,15 +43,16 @@ class OrderCreateSerializer(serializers.Serializer):
             try:
                 stock = Stock.objects.get(menu_item=menu_item)
             
-                if stock.quantity < item["quantity"]:
-                    raise serializers.ValidationError(
-                        detail={
-                            "message" : f"Only {stock.quantity} units available.",
-                            "menu_item" : f"{menu_item.name}",
-                            "remaining" : f"{stock.quantity}",
-                            "code" : "stock_unavailable"
-                        }
-                    )
+                if stock.quantity is not None:
+                    if stock.quantity < item["quantity"]:
+                        raise serializers.ValidationError(
+                            detail={
+                                "message" : f"Only {stock.quantity} units available.",
+                                "menu_item" : f"{menu_item.name}",
+                                "remaining" : f"{stock.quantity}",
+                                "code" : "stock_unavailable"
+                            }
+                        )
             
             except Stock.DoesNotExist:
                 pass

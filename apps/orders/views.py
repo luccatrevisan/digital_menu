@@ -5,7 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from apps.orders.serializers import OrderCreateSerializer
 from apps.orders.services.create_order import create_order
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError as DjangoValidationError
+from apps.orders.exceptions import InsufficientStockError
 
 
 class OrdersView(generics.CreateAPIView):
@@ -23,9 +24,21 @@ class OrdersView(generics.CreateAPIView):
                 user = request.user,
                 items_data = serializer.validated_data["items"]
             )
+        except InsufficientStockError as error:
+            return Response({
+                    "message": str(error),
+                    "code": "insufficient_stock"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
-        except ValidationError as error:
-            return Response(error, status=status.HTTP_400_BAD_REQUEST)
+        except DjangoValidationError as error:
+            return Response({
+                    "message": str(error),
+                    "code": "invalid_order"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)
 
