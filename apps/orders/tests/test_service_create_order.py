@@ -1,4 +1,5 @@
 import pytest
+import threading
 from django.core.exceptions import ValidationError
 from apps.orders.models import Order, OrderItem
 from apps.orders.services.create_order import create_order
@@ -182,3 +183,41 @@ def test_create_order_service_saves_price_snapshot(
     order_item = order.items.first()
 
     assert order_item.unit_price == original_price
+
+
+@pytest.mark.django_db
+def test_two_sequential_orders_decrement_stock_cumulatively(menu_item, stock, user):
+    stock.quantity = 10
+    stock.save()
+
+    create_order(user, [{"menu_item_id": menu_item.id, "quantity": 2}])
+    create_order(user, [{"menu_item_id": menu_item.id, "quantity": 3}])
+
+    stock.refresh_from_db()
+    assert stock.quantity == 5
+
+
+@pytest.mark.django_db(transaction=True)
+def test_concurrent_orders_do_not_oversell_stock(menu_item, stock, user):
+    stock.quantity = 1
+    stock.save()
+
+    barrier = threading.Barrier(2)
+
+    def place_order():
+        barrier.wait()
+        from django.db import connection
+
+        try:
+            create_order(user, [{"menu_item_id": menu_item.id, "quantity": 1}])
+        finally:
+            connection.close()
+
+    threads = [threading.Thread(target=place_order) for _ in range(2)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    stock.refresh_from_db()
+    assert stock.quantity >= 0, "Estoque ficou negativo — overselling ocorreu."
