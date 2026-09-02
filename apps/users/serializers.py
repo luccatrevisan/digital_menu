@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from apps.users.models import CustomUser, Address
 from django.contrib.auth.password_validation import validate_password
-from requests import request
+import requests
 
 VIA_CEP_URL = "https://viacep.com.br/ws/"
 
@@ -64,21 +64,35 @@ class AddressSerializer(serializers.ModelSerializer):
                 }
             )
 
+        try:
+            cep_response = requests.get(VIA_CEP_URL + digits + "/json/", timeout=5)
+            '''
+            When a CEP with a valid format but nonexistent value is queried the response will contain an "erro" value equal to "true". This means the queried CEP was not found in the database.
 
-        cep_response = request.get(VIA_CEP_URL + digits + "/json/")
-        '''
-        When a CEP with a valid format but nonexistent value is queried the response will contain an "erro" value equal to "true". This means the queried CEP was not found in the database.
+            {
+                "cep": "01001000",
+                "logradouro": "Praça da Sé", -> equivalent to 'street'
+                "bairro": "Sé", -> equivalent to 'neighbourhood'
+                "localidade": "São Paulo", -> equivalent to 'city'
+                "uf": "SP", -> equivalent to 'state'
+            }
+            '''
+        except requests.exceptions.Timeout:
+            raise serializers.ValidationError(
+                detail={
+                    "message": "Não foi possível verificar o CEP. Tente novamente.",
+                    "code": "cep_timeout"
+                }
+            )
+        except requests.exceptions.RequestException:
+            raise serializers.ValidationError(
+                detail={
+                    "message": "Não foi possível verificar o CEP. Tente novamente.",
+                    "code": "cep_unavailable"
+                }
+            )
 
-        {
-            "cep": "01001000",
-            "logradouro": "Praça da Sé", -> equivalent to 'street'
-            "bairro": "Sé", -> equivalent to 'neighbourhood'
-            "localidade": "São Paulo", -> equivalent to 'city'
-            "uf": "SP", -> equivalent to 'state'
-        }
-        '''
-
-        if "erro" in cep_response:
+        if "erro" in cep_response.json():
             raise serializers.ValidationError(
                 detail={
                     "message" : "Esse CEP não existe. Confira o valor digitado.",
