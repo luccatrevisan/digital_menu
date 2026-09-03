@@ -30,32 +30,24 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class AddressSerializer(serializers.ModelSerializer):
-    cep = serializers.CharField(
-        required=True, 
-        error_messages={
-            "required" : {
-                "message" : "O CEP é obrigatório.",
-                "code"  : "missing_cep"
-            },
-            "blank" : {
-                "message" : "O CEP não pode estar vazio.",
-                "code"  : "empty_cep"
-            }
-        })
-
     class Meta:
         model = Address
         fields = "__all__"
         read_only_fields = ["user"]
 
     def validate_cep(self, value):
-        '''
-        normalize: accept numbers only and 8 digits (without hifen)        
-        '''
+        # checks if the input is empty
+        if not value or not str(value).strip():
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O CEP não pode ficar vazio.",
+                    "code": "empty_cep"
+                }
+            )
 
         digits = "".join([c for c in str(value).strip() if c.isdecimal()])
 
-
+        # checks if the cep is 8 digits only (not considering the hifen)
         if len(digits) != 8:
             raise serializers.ValidationError(
                 detail={
@@ -67,23 +59,20 @@ class AddressSerializer(serializers.ModelSerializer):
         try:
             cep_response = requests.get(VIA_CEP_URL + digits + "/json/", timeout=5)
             '''
-            When a CEP with a valid format but nonexistent value is queried the response will contain an "erro" value equal to "true". This means the queried CEP was not found in the database.
-
-            {
-                "cep": "01001000",
-                "logradouro": "Praça da Sé", -> equivalent to 'street'
-                "bairro": "Sé", -> equivalent to 'neighbourhood'
-                "localidade": "São Paulo", -> equivalent to 'city'
-                "uf": "SP", -> equivalent to 'state'
-            }
+            ViaCEP output: {
+                    "cep": "01001000", -> only numbers, without hifen.
+                    "uf": "SP"
+                }
             '''
+
         except requests.exceptions.Timeout:
             raise serializers.ValidationError(
                 detail={
-                    "message": "Não foi possível verificar o CEP. Tente novamente.",
+                    "message": "Não foi possível verificar o CEP. Tente novamente mais tarde.",
                     "code": "cep_timeout"
                 }
             )
+        
         except requests.exceptions.RequestException:
             raise serializers.ValidationError(
                 detail={
@@ -92,7 +81,9 @@ class AddressSerializer(serializers.ModelSerializer):
                 }
             )
 
-        if "erro" in cep_response.json():
+        data = cep_response.json()
+
+        if data.get("erro"):
             raise serializers.ValidationError(
                 detail={
                     "message" : "Esse CEP não existe. Confira o valor digitado.",
@@ -100,49 +91,95 @@ class AddressSerializer(serializers.ModelSerializer):
                 }
             )
 
+        if data.get("uf") != "RJ":
+            raise serializers.ValidationError(
+                detail={
+                    "message": "Infelizmente não atendemos no seu estado ainda! Por enquanto nossa área de atuação está focada no RJ.",
+                    "code": "non_service_area"
+                }
+            )
 
         return digits
 
 
     def validate_street(self, value):
         if not value or not str(value).strip():
-            raise serializers.ValidationError(detail={"message": "O nome da rua não pode ficar vazio.", "code": "missing_street"})
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O nome da rua não pode ficar vazio.", 
+                    "code": "empty_street"
+                }
+            )
 
         return str(value).strip()
 
 
     def validate_number(self, value):
-        if value is None or (isinstance(value, str) and not value.strip()):
-            raise serializers.ValidationError(detail={"message": "O número do endereço é obrigatório.", "code": "missing_number"})
+        if not value or not str(value).strip():
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O número do endereço é obrigatório.", 
+                    "code": "empty_number"
+                }
+            )
 
         return str(value).strip()
 
 
     def validate_neighborhood(self, value):
         if not value or not str(value).strip():
-            raise serializers.ValidationError(detail={"message": "O bairro não pode ficar vazio.", "code": "missing_neighborhood"})
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O bairro não pode ficar vazio.", 
+                    "code": "empty_neighborhood"
+                }
+            )
 
         return str(value).strip()
 
 
     def validate_city(self, value):
         if not value or not str(value).strip():
-            raise serializers.ValidationError(detail={"message": "A cidade não pode ficar vazia.", "code": "missing_city"})
+            raise serializers.ValidationError(
+                detail={
+                    "message": "A cidade não pode ficar vazia.", 
+                    "code": "empty_city"
+                }
+            )
 
         return str(value).strip()
 
 
     def validate_state(self, value):
+        if not value or not str(value).strip():
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O estado não pode ficar vazio",
+                    "code": "empty_state"
+                }
+            )
+
         if not isinstance(value, str) or not value.strip().isalpha() or len(value.strip()) != 2:
-            raise serializers.ValidationError(detail={"message": "O estado deve conter exatamente 2 letras (UF).", "code": "invalid_state"})
+            raise serializers.ValidationError(
+                detail={
+                    "message": "O estado deve conter exatamente 2 letras (RJ).", 
+                    "code": "invalid_state"
+                }
+            )
 
         return value.strip().upper()
 
 
     def validate_label(self, value):
         allowed = {"CASA", "TRABALHO"}
+
         if not value or str(value).strip().upper() not in allowed:
-            raise serializers.ValidationError(detail={"message": "Tipo de endereço inválido. Opções: CASA, TRABALHO.", "code": "invalid_label"})
+            raise serializers.ValidationError(
+                detail={
+                    "message": "Tipo de endereço inválido. Opções: CASA, TRABALHO.",
+                    "code": "invalid_label"
+                }
+            )
 
         return str(value).strip().upper()
 
