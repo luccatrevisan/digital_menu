@@ -61,16 +61,16 @@
                 </button>
 
                 <form id="address-form" hidden>
+                    <p id="address-warning" hidden style="color:orangered"></p>
 
                     <label>
                         CEP
                         <input 
                             type="text"
                             id="cep"
-                            placeholder="12345999"
+                            placeholder="Apenas números"
                             inputmode="numeric"
                             maxlength="8"
-                            pattern="[0-9]{8}"
                             required
                         >
                     </label>
@@ -126,15 +126,9 @@
 
                     <label>
                         Estado
-                        <input 
-                            type="text" 
-                            id="state" 
-                            maxlength="2" 
-                            pattern="[A-Za-z]{2}" 
-                            placeholder="UF"
-                            style="text-transform: uppercase;"
-                            required
-                        >
+                        <select id="state">
+                            <option value="RJ">RJ</option>
+                        </select>
                     </label>
 
                     <label>

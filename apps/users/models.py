@@ -8,6 +8,10 @@ class CustomUser(AbstractUser):
 
 
 class Address(models.Model):
+    STATE_CHOICES = [
+        ('RJ', 'Rio de Janeiro')
+    ]
+
     LABEL_CHOICES = [
         ('CASA', 'Casa'),
         ('TRABALHO', 'Trabalho')
@@ -20,8 +24,8 @@ class Address(models.Model):
     complement = models.CharField(max_length=255, null=True, blank=True) 
     neighborhood = models.CharField(max_length=100, null=False, blank=False)
     city = models.CharField(max_length=100, null=False, blank=False)
-    state = models.CharField(max_length=2, null=False, blank=False)
-    label = models.CharField(max_length=50, choices=LABEL_CHOICES, null=True, blank=True) 
+    state = models.CharField(max_length=2, choices=STATE_CHOICES, null=False, blank=False)
+    label = models.CharField(max_length=30, choices=LABEL_CHOICES, null=False, blank=False) 
 
     def __str__(self):
         return f'{self.street}, {self.number} - {self.city}/{self.state}'

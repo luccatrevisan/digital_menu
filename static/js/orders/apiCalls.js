@@ -107,7 +107,30 @@ async function createAddress() {
         });
 
         if (!response.ok) {
-            throw new Error("Could not create address.");
+            const error = await response.json();
+            const addressWarning = document.getElementById("address-warning");
+            addressWarning.hidden = false;
+
+            if (error["cep"]){
+                addressWarning.textContent = error["cep"][0];
+            }
+            else if (error["street"]){
+                addressWarning.textContent = error["street"][0];
+            }
+            else if (error["number"]){
+                addressWarning.textContent = error["number"][0];
+            }
+            else if (error["neighborhood"]){
+                addressWarning.textContent = error["neighborhood"][0];
+            }
+            else if (error["city"]){
+                addressWarning.textContent = error["city"][0];
+            }
+            else {
+                addressWarning.textContent = "Não foi possível cadastrar o endereço. Tente novamente";
+            }
+
+            return;
         }
 
         const address = await response.json();
@@ -115,6 +138,10 @@ async function createAddress() {
 
     } catch (error) {
         console.error(error);
+
+        const addressWarning = document.getElementById("address-warning");
+        addressWarning.hidden = false;
+        addressWarning.textContent = "Não foi possível cadastrar o endereço. Verifique sua conexão e tente novamente.";
     }
 }
 
