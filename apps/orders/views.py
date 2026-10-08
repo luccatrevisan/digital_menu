@@ -22,22 +22,30 @@ class OrdersView(generics.CreateAPIView):
         try:
             order = create_order(
                 user = request.user,
-                items_data = serializer.validated_data["items"]
+                items_data = serializer.validated_data["items"],
+                address_id = serializer.validated_data["address_id"],
             )
+            
         except InsufficientStockError as error:
-            return Response({
-                    "message": str(error),
-                    "code": "insufficient_stock"
+            return Response(
+                {
+                    "items": {
+                        "message": str(error),
+                        "menu_item": error.menu_item_name,
+                        "remaining": error.available_quantity,
+                        "code": "stock_unavailable",
+                    }
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
         
         except DjangoValidationError as error:
-            return Response({
-                    "message": str(error),
-                    "code": "invalid_order"
+            return Response(
+                {
+                    "message": error.messages[0],
+                    "code": getattr(error, "code", None) or "invalid_order",
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         return Response({"order_id" : order.id}, status=status.HTTP_201_CREATED)

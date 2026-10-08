@@ -2,27 +2,13 @@ from django.db import transaction
 from apps.orders.models import Order, OrderItem
 from apps.menu.models import MenuItem, Stock
 from apps.orders.exceptions import InsufficientStockError
+from apps.users.models import Address
 
-'''
-    payload = {
-        "items": [
-            {
-                "menu_item_id": 3,
-                "quantity": 2
-            },
-            {
-                "menu_item_id" : 4,
-                "quantity" : 1
-            }
-        ]
-    }
-'''
 
-def create_order(user, items_data):
+def create_order(user, items_data, address_id):
     with transaction.atomic():
-        order = Order.objects.create(
-            user = user
-        )
+        address = Address.objects.get(pk=address_id, user=user)
+        order = Order.objects.create(user = user, address=address)
 
         for item in items_data:
             menu_item_id = item.get("menu_item_id")

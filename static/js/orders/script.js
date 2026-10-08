@@ -114,44 +114,31 @@ function renderOrderSummary() {
 }
 
 
-
-function renderAdresses(addresses) {
+function renderAddresses(addresses) {
     const addressList = document.getElementById("address-list");
-    addressList.innerHTML = "";
 
-    if (!addresses || addresses.length === 0) { 
+    if (!addresses || addresses.length === 0) {
         addressList.innerHTML = `<p>Você ainda não possui endereços cadastrados.</p>`;
-        
         document.getElementById("address-form").hidden = false;
         return;
     }
 
-    addresses.forEach(address => {
-        addressList.innerHTML += `
-            <label class="address-card">
-
-                <input
-                    type="radio"
-                    name="selected-address"
-                    value="${address.id}"
-                    ${addresses.indexOf(address) === (addresses.length - 1) ? "checked='true'" : "checked='false'"}
-                >
-
-                <strong>${address.label}</strong><br>
-
-                ${address.street}, ${address.number}<br>
-
-                ${address.neighborhood} - ${address.city}/${address.state}<br>
-
-                CEP: ${address.cep}
-
-            </label>
-
-            <hr>
-
-        `;
-    });
-};
+    addressList.innerHTML = addresses.map((address, index) => `
+        <label class="address-card">
+            <input
+                type="radio"
+                name="selected-address"
+                value="${address.id}"
+                ${index === addresses.length - 1 ? "checked" : ""}
+            >
+            <strong>${address.label}</strong><br>
+            ${address.street}, ${address.number}<br>
+            ${address.neighborhood} - ${address.city}/${address.state}<br>
+            CEP: ${address.cep}
+        </label>
+        <hr>
+    `).join("");
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
     renderOrderSummary();

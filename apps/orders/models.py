@@ -19,7 +19,10 @@ class Order(models.Model):
 
     def validate_minimum_price(self):
         if self.total_price < 30:
-            raise ValidationError("The total price should be R$30,00 or more.")
+            raise ValidationError(
+                "The total price should be R$30,00 or more.",
+                code="minimum_order",
+            )
 
     def __str__(self):
         return f"Order #{self.id}"
