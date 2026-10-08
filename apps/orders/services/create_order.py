@@ -22,6 +22,7 @@ def create_order(user, items_data, address_id):
                 if stock.quantity is not None:
                     if stock.quantity < quantity:
                         raise InsufficientStockError(menu_item.name, stock.quantity)
+                    
                     stock.quantity -= quantity
                     stock.save(update_fields=["quantity"])
 

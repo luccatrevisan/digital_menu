@@ -71,6 +71,17 @@ function showFeedback(id) {
 
 const checkoutButton = document.getElementById("checkout-btn");
 
+function checkout() {
+    const accessToken = localStorage.getItem("access");
+
+    if (!accessToken) {
+        window.location.href = "/login/";
+        return;
+    }
+
+    window.location.href = "/orders/checkout/";
+}
+
 if (checkoutButton) {
     checkoutButton.addEventListener("click", checkout);
 }
@@ -141,10 +152,14 @@ function renderAddresses(addresses) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    if (!document.getElementById("order-summary")) {
+        return;
+    }
+
     renderOrderSummary();
     
     const addresses = await loadAddresses();
-    renderAdresses(addresses);
+    renderAddresses(addresses);
 
 });
 
@@ -165,7 +180,7 @@ if (addressForm) {
         await createAddress();
 
         const addresses = await loadAddresses();
-        renderAdresses(addresses);
+        renderAddresses(addresses);
 
         addressForm.reset();
         addressForm.hidden = true;
@@ -185,7 +200,7 @@ window.showFeedback = showFeedback;
 window.openCart = openCart;
 window.closeCart = closeCart;
 window.renderOrderSummary = renderOrderSummary;
-window.renderAdresses = renderAdresses;
+window.renderAddresses = renderAddresses;
 
 window.onclick = function(event) {
     const modal = document.getElementById('modalCarrinho');

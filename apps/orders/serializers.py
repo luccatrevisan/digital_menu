@@ -12,14 +12,12 @@ class OrderCreateSerializer(serializers.Serializer):
     address_id = serializers.IntegerField()
     items = OrderItemInputSerializer(many=True)
 
-
     def validate_address_id(self, value):
         user = self.context["request"].user
         if not Address.objects.filter(id=value, user=user).exists():
             raise serializers.ValidationError("Non Existing Address")
 
         return value
-
     
     def validate_items(self, items):
         if not items:

@@ -8,6 +8,12 @@ function getSelectedAddressId() {
     return selected ? Number(selected.value) : null;
 }
 
+const confirmOrderButton = document.getElementById("confirm-order");
+
+if (confirmOrderButton) {
+    confirmOrderButton.addEventListener("click", confirmOrder);
+}
+
 
 async function confirmOrder() {
     const addressId = getSelectedAddressId();
