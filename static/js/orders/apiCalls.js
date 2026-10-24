@@ -55,7 +55,20 @@ async function createAddress() {
         });
 
         if (!response.ok) {
-            const error = await response.json();
+            if (response.status === 401) {
+                localStorage.removeItem("access");
+                localStorage.removeItem("refresh");
+                window.location.href = "/login/";
+                return;
+            }
+
+            let error = {};
+            try {
+                error = await response.json();
+            } catch (e) {
+                console.error("Non-JSON response:", e);
+            }
+
             const addressWarning = document.getElementById("address-warning");
             addressWarning.hidden = false;
 

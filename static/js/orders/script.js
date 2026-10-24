@@ -70,14 +70,35 @@ function showFeedback(id) {
 
 
 const checkoutButton = document.getElementById("checkout-btn");
+const orderWarning = document.getElementById("order-warning");
 
 function checkout() {
-    const accessToken = localStorage.getItem("access");
+    orderWarning.hidden = true;
 
+    const accessToken = localStorage.getItem("access");
     if (!accessToken) {
         window.location.href = "/login/";
         return;
     }
+
+    const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    if (cart.length === 0) {
+        orderWarning.textContent = "Seu carrinho está vazio.";
+        orderWarning.hidden = false;
+        return;
+    };
+
+    const total = cart.reduce(
+        (sum, item) => sum + Number(item.price) * item.quantity,
+        0
+    );
+
+    if (total < 30) {
+        orderWarning.textContent = "O pedido mínimo é de R$30,00.";
+        orderWarning.hidden = false;
+        return;
+    };
 
     window.location.href = "/orders/checkout/";
 }
@@ -177,7 +198,10 @@ if (addressForm) {
     addressForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        await createAddress();
+        document.getElementById("address-warning").hidden = true;
+
+        const created = await createAddress();
+        if (!created) return;
 
         const addresses = await loadAddresses();
         renderAddresses(addresses);

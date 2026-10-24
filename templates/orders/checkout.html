@@ -4,32 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>Seu pedido | Chewie Cookies</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 </head>
 
-<body>
+<body class="checkout-page">
 
     <main class="checkout">
 
-        <section class="checkout-card">
+        <header class="checkout-head">
+            <div class="brand-badge">
+                <img src="{% static 'img/logo_chewie.jpg' %}" alt="Chewie Cookies">
+            </div>
+            <div>
+                <h1>Seu pedido</h1>
+                <p>Confira os cookies e escolha onde entregar.</p>
+            </div>
+        </header>
 
-            <h1>Checkout</h1>
+        <div class="checkout-grid">
 
-            <p>
-                Confira seu pedido antes de confirmar.
-            </p>
-
-            <hr>
-
-            <!-- ========================= -->
-            <!-- ORDER SUMMARY             -->
-            <!-- ========================= -->
-
-            <section>
-
-                <h2>Resumo do pedido</h2>
+            <!-- ORDER SUMMARY -->
+            <section class="summary">
+                <h2>Seus cookies</h2>
 
                 <div id="order-summary"></div>
 
@@ -37,139 +40,86 @@
                     <span>Total</span>
                     <strong id="cart-total">R$ 0,00</strong>
                 </div>
-
             </section>
 
-            <hr>
+            <div class="side">
 
-            <!-- ========================= -->
-            <!-- DELIVERY ADDRESS          -->
-            <!-- ========================= -->
+                <!-- DELIVERY ADDRESS -->
+                <section class="delivery">
+                    <h2>Onde entregar</h2>
 
-            <section>
+                    <div id="address-list"></div>
 
-                <h2>Endereço de entrega</h2>
-
-                <div id="address-list">
-
-                </div>
-
-                <button
-                    id="new-address-button"
-                    type="button">
-                    Adicionar novo endereço
-                </button>
-
-                <form id="address-form" hidden>
-                    <p id="address-warning" hidden style="color:orangered"></p>
-
-                    <label>
-                        CEP
-                        <input 
-                            type="text"
-                            id="cep"
-                            placeholder="Apenas números"
-                            inputmode="numeric"
-                            maxlength="8"
-                            required
-                        >
-                    </label>
-
-                    <label>
-                        Logradouro
-                        <input
-                            type="text" 
-                            id="street"
-                            placeholder="Rua dos Cookies"
-                            required
-                        >
-                    </label>
-
-                    <label>
-                        Número
-                        <input
-                            type="text"
-                            id="number"
-                            placeholder="315, 32A, Lote 1 Quadra 4 etc"
-                            required
-                        >
-                    </label>
-
-                    <label>
-                        Complemento
-                        <input 
-                            type="text"
-                            id="complement" 
-                            placeholder="Casa, Apto, Bloco, Referência etc"
-                        >
-                    </label>
-
-                    <label>
-                        Bairro
-                        <input 
-                            type="text" 
-                            id="neighborhood"
-                            placeholder="Centro"
-                            required
-                        >
-                    </label>
-
-                    <label>
-                        Cidade
-                        <input 
-                            type="text" 
-                            id="city"
-                            placeholder="Niterói, São Gonçalo etc"
-                            required
-                        >
-                    </label>
-
-                    <label>
-                        Estado
-                        <select id="state">
-                            <option value="RJ">RJ</option>
-                        </select>
-                    </label>
-
-                    <label>
-                        Tipo
-                        <select id="label">
-                            <option value="CASA">Casa</option>
-                            <option value="TRABALHO">Trabalho</option>
-                        </select>
-                    </label>
-
-                    <button type="submit">
-                        Salvar endereço
+                    <button id="new-address-button" class="btn-ghost" type="button">
+                        Adicionar novo endereço
                     </button>
 
-                </form>
+                    <form id="address-form" hidden>
+                        <p id="address-warning" class="warning" hidden></p>
 
-            </section>
+                        <div class="form-grid">
+                            <label class="field">
+                                CEP
+                                <input type="text" id="cep" placeholder="Apenas números"
+                                       inputmode="numeric" maxlength="8" required>
+                            </label>
 
-            <hr>
+                            <label class="field">
+                                Estado
+                                <select id="state">
+                                    <option value="RJ">RJ</option>
+                                </select>
+                            </label>
 
-            <!-- ========================= -->
-            <!-- ACTIONS                   -->
-            <!-- ========================= -->
+                            <label class="field wide">
+                                Logradouro
+                                <input type="text" id="street" placeholder="Rua dos Cookies" required>
+                            </label>
 
-            <section class="checkout-actions">
+                            <label class="field">
+                                Número
+                                <input type="text" id="number" placeholder="315, 32A, Lote 1 Quadra 4" required>
+                            </label>
 
-                <a
-                    href="/"
-                    class="secondary-button">
-                    Voltar ao cardápio
-                </a>
+                            <label class="field">
+                                Complemento
+                                <input type="text" id="complement" placeholder="Apto, Bloco, Referência">
+                            </label>
 
+                            <label class="field">
+                                Bairro
+                                <input type="text" id="neighborhood" placeholder="Centro" required>
+                            </label>
 
-                <p id="order-warning" hidden style="color:orangered"></p>
-                <button id="confirm-order">
-                    Confirmar pedido
-                </button>
+                            <label class="field">
+                                Cidade
+                                <input type="text" id="city" placeholder="Niterói, São Gonçalo" required>
+                            </label>
 
-            </section>
+                            <label class="field wide">
+                                Tipo
+                                <select id="label">
+                                    <option value="CASA">Casa</option>
+                                    <option value="TRABALHO">Trabalho</option>
+                                </select>
+                            </label>
+                        </div>
 
-        </section>
+                        <button type="submit" class="btn-primary">Salvar endereço</button>
+                    </form>
+                </section>
+
+                <!-- ACTIONS -->
+                <section class="checkout-actions">
+                    <p id="order-warning" class="warning" hidden></p>
+                    <button id="confirm-order" class="btn-primary" type="button">
+                        Confirmar pedido
+                    </button>
+                    <a href="/" class="back-link">Voltar ao cardápio</a>
+                </section>
+
+            </div>
+        </div>
 
     </main>
 
